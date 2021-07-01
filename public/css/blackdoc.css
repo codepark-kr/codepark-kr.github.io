@@ -27,8 +27,14 @@ ______ _            _   ______
  * Update the foundational and global aspects of the page.
  */
 
+ @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600;1,700&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300;1,400;1,600&display=swap');
+
 html {
-  font-family: "PT Sans", Helvetica, Arial, sans-serif;
+  /* font-family: 'Noto Serif', serif; */
+  font-family: 'Source Serif Pro', serif;
+ /* font-family: 'Source Sans Pro', sans-serif; */
 }
 
 body {
@@ -42,8 +48,11 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'EB Garamond', serif;
+  font-family: 'Bebas Neue', cursive;
+  letter-spacing: .6px;
   color: #aaa;
+  margin-top: 40px;
+  margin-bottom: 0px;
 }
 
 h1 a,
@@ -52,7 +61,7 @@ h3 a,
 h4 a,
 h5 a,
 h6 a {
-  font-family: 'EB Garamond', serif;
+  font-family: 'Bebas Neue', cursive;
   color: #50585d;
   font-kerning: auto;
   font-feature-settings: "kern", "liga", "dlig", "hlig", "cswh";
@@ -60,8 +69,9 @@ h6 a {
 }
 
 a {
-  color: #ffeb99;
-  transition: color ease 0.3s;
+  color: #ee1ea5d2;
+  transition: color ease 0.2s;
+  /* text-decoration: underline; */
 }
 
 a:hover {
@@ -82,6 +92,10 @@ a:hover {
   color: #26282d;
   background-color: #ebcb8b;
   border-color: #ebcb8b;
+}
+
+.post-date{
+  margin-top: -6px;
 }
 
 strong,
@@ -115,7 +129,7 @@ hr {
 }
 
 blockquote {
-  color: #666;
+  color: #777;
   border-left: .25rem solid #333;
 }
 
@@ -137,12 +151,14 @@ tbody tr:nth-child(odd) th {
 
 @media (min-width: 48em) {
   html {
-    font-size: 16px;
+    max-width: 800px;
+    font-size: 1.0rem;
   }
 }
 @media (min-width: 58em) {
   html {
-    font-size: 20px;
+    font-size: 1.1rem;
+    max-width: 1200px;
   }
 }
 
@@ -199,18 +215,18 @@ tbody tr:nth-child(odd) th {
     left: 0;
     bottom: 0;
     width: 18rem;
-    text-align: left;
   }
 }
 
 /* Sidebar links */
 .sidebar a {
-  color: #caad00;
+  /* color: #caad00; */
+  color: #08979d;
 }
 
 /* About section */
 .sidebar-about h1 {
-  color: #caad00;
+  color: #08979d;
   margin-top: 0;
   font-family: 'Noto Serif', serif;
   font-size: 2.25rem;
@@ -280,11 +296,16 @@ a.sidebar-nav-item:focus {
  * page is wrapped in `.page` and is only used on the page layout.
  */
 
+ .page{
+  margin-left: auto;
+  margin-right: auto;
+ }
+
 /* Blog post or page title */
 .page-title,
 .post-title,
 .post-title a {
-  color: #caad00;
+  color: #08979d;
 }
 
 /*
