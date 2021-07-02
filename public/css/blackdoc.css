@@ -33,6 +33,8 @@ ______ _            _   ______
 
 html {
   font-family: 'Source Serif Pro', serif;
+  word-break: break-all;
+  hyphens: auto;
 }
 
 body {
@@ -99,6 +101,7 @@ a:hover {
 strong,
 b {
   color: #848471;
+  font-weight: bolder;
 }
 /* Code */
 
@@ -150,13 +153,13 @@ tbody tr:nth-child(odd) th {
 @media (min-width: 48em) {
   html {
     max-width: 800px;
-    font-size: 15px;
+    font-size: 1.1rem;
   }
 }
 @media (min-width: 58em) {
   html {
-    font-size: 18px;
     max-width: 1200px;
+    font-size: 1.2rem;
   }
 }
 
@@ -270,6 +273,8 @@ a.sidebar-nav-item:focus {
 .content {
   padding-top: 4rem;
   padding-bottom: 4rem;
+  /* border: 1px solid salmon; */
+  margin-top: 3rem;
 }
 
 @media (min-width: 48em) {
@@ -293,7 +298,6 @@ a.sidebar-nav-item:focus {
  * Each post is wrapped in `.post` and is used on default and post layouts. Each
  * page is wrapped in `.page` and is only used on the page layout.
  */
-
  .page{
   margin-left: auto;
   margin-right: auto;
@@ -304,6 +308,7 @@ a.sidebar-nav-item:focus {
 .post-title,
 .post-title a {
   color: #08979d;
+  margin-top: -2.4rem;
 }
 
 /*
