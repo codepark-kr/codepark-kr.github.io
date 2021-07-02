@@ -32,9 +32,7 @@ ______ _            _   ______
  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300;1,400;1,600&display=swap');
 
 html {
-  /* font-family: 'Noto Serif', serif; */
   font-family: 'Source Serif Pro', serif;
- /* font-family: 'Source Sans Pro', sans-serif; */
 }
 
 body {
@@ -202,7 +200,7 @@ tbody tr:nth-child(odd) th {
  */
 
 .sidebar {
-  text-align: center;
+  text-align: left;
   padding: 2rem 1rem;
   color: rgba(255, 255, 255, .5);
   background-color: #000;
