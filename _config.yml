@@ -4,8 +4,8 @@ highlighter:      rouge
 
 # Setup
 title:            Archive
-tagline:          from junior BE Developer
-description:      "The Archive from junior Back-end Developer/n@codepark"
+tagline:          "@codepark"
+description:      "The Archive from junior Back-end Developer"
 url:              https://codepark.kr
 baseurl:          /
                   # the optional subpath of your site, e.g. "/my-jekyll-site/"
