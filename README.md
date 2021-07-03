@@ -9,7 +9,7 @@ This new archive-blog made with Jekyll also it based on Ruby and SCSS. The whole
 This site is published at https://codepark.kr/
 
 ---
- ### CONTENTS (frequent update)
+CONTENTS **_(frequent update)_**
 
 Spring Boot & JPA - Documentation
 <br>
