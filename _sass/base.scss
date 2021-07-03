@@ -25,8 +25,8 @@
  */
 $base-font-family:     'Source Serif Pro', 'Noto Sans KR' !default;
 $syntax-highlight-font-family: 'Source Code Pro', 'Noto Sans KR';
-$base-font-size:       14px !default;
-$mobile-font-size:     13px !default;
+$base-font-size:       16px !default;
+$mobile-font-size:     14px !default;
 $base-line-height:     1.7 !default;
 $container-width:      90% !default;
 $container-max-width:  800px !default;
@@ -46,9 +46,9 @@ p, ul, ol { margin: 0px;  color: var(--text-color); }
 a { text-decoration: underline;  color: var(--link-color); }
 a:hover { color: var(--background-color); background-color: var(--base-color); }
 
-h1{ font-size: 23px; background-color: #af8c9d; color: #000 !important; margin-top: -10px; margin-bottom: 10px; padding-left: 10px;}
-h2{ font-size: 19px; margin-bottom: 20px;}
-h3{ font-size: 17px; }
+h1{ font-size: 24px; background-color: #af8c9d; color: #000 !important; margin-top: -10px; margin-bottom: 10px; padding-left: 10px;}
+h2{ font-size: 20px; margin-bottom: 20px;}
+h3{ font-size: 18px; }
 hr{ margin-top: 20px; margin-bottom: 20px; }
 strong{ color: rgb(108, 199, 193); }
 
