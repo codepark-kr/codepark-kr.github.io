@@ -1,31 +1,61 @@
 @charset "utf-8";
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
+
+
+@font-face{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    src: local('※'),
+    url(../assets/fonts/NotoSansKR-Thin.otf),
+    url(../assets/fonts/NotoSansKR-Regular.otf),
+    url(../assets/fonts/NotoSansKR-Medium.otf),
+    url(../assets/fonts/NotoSansKR-Light.otf),
+    url(../assets/fonts/NotoSansKR-Bold.otf),
+    url(../assets/fonts/NotoSansKR-Black.otf);
+    unicode-range: U+AC00-U+D7A3;
+}
 
 /**
  * Style variables
  */
-$base-font-family:     'Source Code Pro', monospace !default;
-$base-font-size:       12.5px !default;
-$mobile-font-size:     12px !default;
-$base-line-height:     1.5 !default;
+$base-font-family:     'Source Serif Pro', 'Noto Sans KR' !default;
+$syntax-highlight-font-family: 'Source Code Pro', 'Noto Sans KR';
+$base-font-size:       15px !default;
+$mobile-font-size:     13px !default;
+$base-line-height:     1.7 !default;
 $container-width:      90% !default;
-$container-max-width:  600px !default;
+$container-max-width:  800px !default;
 
 /**
  * Global
  */
-body { background-color: var(--background-color);  margin: 0 auto;  padding: 0;  font-family: $base-font-family;  font-size: $base-font-size;  color: var(--text-color);  text-align: left;  line-height: $base-line-height !important; }
-h1, h2, h3, h4, h5, h6 { font-size: $base-font-size;  margin: 0px;  margin-top: 22px;  font-weight: bold;  color: var(--text-color); }
+body { background-color: var(--background-color);  margin: 0 auto;  padding: 0;  font-family: $base-font-family; 
+       font-size: $base-font-size;  color: var(--text-color);  text-align: left;  line-height: $base-line-height !important; }
+img{ width: 100%;  max-width: $container-max-width; height: auto;}
+
+h1, h2, h3, h4, h5, h6 {  margin: 0px;  font-weight: bold;  color: var(--text-color); color: #cecea6;}
 p, ul, ol { margin: 0px;  color: var(--text-color); }
 a { text-decoration: underline;  color: var(--link-color); }
 a:hover { color: var(--background-color); background-color: var(--base-color); }
+
+h1{ font-size: 23px; background-color: rgba(219, 219, 219, 0.99); color: #000 !important; margin-top: -10px; margin-bottom: 5px;}
+h2{ font-size: 19px; margin-bottom: 20px;}
+h3{ font-size: 17px; }
+hr{ margin-top: 20px; margin-bottom: 20px; }
+strong{ color: rgb(75, 155, 149); }
+
 @media only screen and (max-device-width: 500px) { * { font-size: $mobile-font-size !important; } }
 
 /**
  * Layout
  */
 .container { width: $container-width;  max-width: $container-max-width;  margin-right: auto;  margin-left: auto; }
-p { word-wrap: break-word;  word-break: break-word;  white-space: pre-wrap; margin-bottom: 15px; }
+p { word-wrap: break-all;  word-break: break-all;  white-space: pre-wrap; margin-bottom: 15px; hyphens: auto; }
 footer { color: var(--text-color);  border-top: var(--border);  margin: 20px auto 15px;  padding-top: 10px;  text-align: right; }
 header { margin-top: 25px;  margin-bottom: 10px; }
 header p { text-align: left;  margin: 0; }
@@ -71,8 +101,10 @@ textarea { vertical-align: top; }
  * Code and syntax highlighting
  */
 .lineno { color: var(--code-color-1); margin-right: 15px; }
-figure.highlight { margin: 5px 0; }
-pre { background-color: var(--background-color);  border: none;  padding: 0;  margin: 0;  overflow:auto;  font-size: $base-font-size;  color: var(--text-color);  line-height: 1.7 !important;  font-family: $base-font-family !important; }
+figure.highlight { margin: 5px 0; border: 1px solid rgb(59, 58, 58); background-color: rgb(51, 49, 49); margin-bottom: 20px;
+                   width: fit-content; margin-left: 20px; padding: 10px; }
+pre { background-color: rgb(51, 49, 49);  border: none;  padding: 0;  margin: 0;  overflow: auto;  font-size: $base-font-size;  
+      color: var(--text-color);  line-height: 1.7 !important;  font-family: 'Source Sans Pro', monospace !important; }
 .highlight .hll { background-color: var(--code-color-2); }
 .highlight .c { color: var(--code-color-1); font-style: italic } /* Comment */
 .highlight .err { color: var(--code-color-3); background-color: var(--code-color-4); } /* Error */
