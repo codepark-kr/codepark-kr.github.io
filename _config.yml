@@ -5,13 +5,14 @@ url: "https://b2a3e8.github.io"
 
 header_pages:
   - index.md
+  - about.md
   - transcription.md
   - spring-theory.md
   - spring-boot&JPA.md
   - database.md
   - debug.md
-  - about.md
-  - contact.md
+  - seminar-lecture.md
+  # - contact.md
 
 style: dark
 

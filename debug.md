@@ -1,10 +1,10 @@
 ---
 layout: page
-title: /debug
-permalink: /debug
+title: /debug&refactor
+permalink: /debug-refactor
 ---
 
-### Debug (frequent update)
+### Debug & Refactor (frequent update)
 
 `2021.06.01-2021.11.21`
 @yb park 
@@ -13,7 +13,7 @@ permalink: /debug
 
 CONTENTS
 [3. Debug](#3-debug)
-    [3-1. [cat.NCDC OPE API] func. ApiInfo012](#3-1-catncdc-ope-api-func-ApiInfo012)
+    [3-1. [cat.NCDC OPEN API] func. ApiInfo012](#3-1-catncdc-ope-api-func-ApiInfo012)
     [3-2. [cat.Eclipse] java.lang.OutOfMemoryError: PermGen space](#3-2-cateclipse-javalangoutofmemoryerror-permgen-space)
     [3-3. [Tibero5/Oracle DBMS] Alter System Kill Session](#3-3-tibero5oracle-dbms-alter-system-kill-session)
     [3-4. [Tibero5/Oracle DBMS] Recover & Restore for updated wrong data](#3-4-tibero5oracle-dbms-recover--restore-for-updated-wrong-data)
