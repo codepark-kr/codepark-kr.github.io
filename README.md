@@ -1,4 +1,4 @@
-## The new archive-blog by Jekyll based on Ruby and SCSS.
+## This new archive-blog made with Jekyll also it based on Ruby and SCSS.
 @codepark
 <br>
 `SINCE 2021.07.03-`
