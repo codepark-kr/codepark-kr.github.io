@@ -6,4 +6,4 @@
 `SINCE 2021.07.03-`
 
 <br>
-The posting written with Markdown Syntax.
+The whole posts written with Markdown Syntax.
