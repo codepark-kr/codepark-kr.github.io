@@ -4,6 +4,6 @@ layout: home
 permalink: /
 ---
 
-# MAIN PAGE
+# ARCHIVE
 
-The archive from junior BE developer
+from junior BE developer

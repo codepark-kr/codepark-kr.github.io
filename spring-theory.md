@@ -1,9 +1,8 @@
 ---
-title: /spring-theory
 layout: page
+title: /spring-theory
 permalink: /spring-theory
 ---
-
 ### Spring Boot Theory (frequent update)
 
 `12.05.2021-`
@@ -45,7 +44,6 @@ CONTENTS
 # 1. Aspect Oriented Programming with Spring
 ## 0. Theory : Aspect-Oriented-Programming
 ### 0-0. Reference
-
 [[Spring] Spring AOP - 기본 이론편](https://sabarada.tistory.com/94)
 [[Spring] 스프링 AOP (Spring AOP) 총정리 : 개념, 프록시 기반 AOP, @AOP](https://engkimbs.tistory.com/746)
 [Chapter 6. Aspect Oriented Programming with Spring](https://docs.spring.io/spring-framework/docs/2.5.x/reference/aop.html)
@@ -53,7 +51,7 @@ CONTENTS
 [AOP(3) - Dynamic Proxy](https://dahye-jeong.gitbook.io/spring/spring/2020-04-10-aop-dynamicproxy)
 
 ### 0-1. Introduction
-![img2](/uploads/Untitled%20(4).png)
+![img2](/uploads/Untitled%20(3).png)
 Aspect Oriented Programming, 즉 관점 지향 프로그래밍이란 어떠한 로직을 기준으로 핵심적인 관점, 부가적인 관점을 구분하여 관점 기준으로 각각 모듈화(공통된 로직 또는 기능 등을 하나의 단위로 묶어내는 것)하는 것을 말한다. 예를 들어 핵심적인 관점이란 핵심 비즈니스 로직을 의미하며, 부가적인 관점이란 핵심 로직을 실행하기 위해서 행해지는 데이터베이스 연결, 로깅, 파일 입출력 등을 말한다. AOP에서 각 관점을 기준으로 로직을 모듈화 한다는 것은 곧 코드들을 부분적으로 나누어서 모듈화 하겠다는 의미이며, 이 때 소스 코드 상에서 여러 부분에 반복 적으로 사용하는 코드들을 Crosscutting-concern이라고 명칭한다. 이러한 **Crosscutting-concern을 Aspect로 모듈화 하고, 핵심적인 비즈니스 로직에서 분리하여 재사용하는 것이 곧 AOP의 취지이다.**
 
 Spring AOP enables Aspect-Oriented Programming in spring applications. In AOP, aspects enable the modularization of concerns such as transaction management, logging or security that cut across multiple types and objects (often termed **crosscutting concerns**).
@@ -61,7 +59,6 @@ Spring AOP enables Aspect-Oriented Programming in spring applications. In AOP, a
 AOP provides the way to dynamically add the cross-cutting concern before, after or around the actual logic using simple pluggable configurations. it make easy to maintain code in present and future as well. You can add/remove concerns without recompiling complete source code simply by changing configuration files.
 
 ### 0-2. AOP Concepts
-
 1. Advice
     Advice represents taken by an aspect at a particular join point. 
     There are different types of advices:
@@ -111,33 +108,34 @@ For example, the following pointcut expression matches all of the methods declar
 *also wildcards :*
 - **asterisk** : matches with any return type also any modifier.
 - **two dots** : matches with any number of arguments.
-
-1. Match all methods within a class in another package
+<br>
+<br>
+* Match all methods within a class in another package
 {% highlight java %}
 execution(*com.howtodoinjava.EmployeeManager.*(..))
 {% endhighlight %}
 
-1. Match all methods within a class within same package
+* Match all methods within a class within same package
  {% highlight java %}
 execution(* EmployeeManager.*(..))
 {% endhighlight %}
 
-3. Match methods in EmployeeManager with specific modifier
+* Match methods in EmployeeManager with specific modifier
  {% highlight java %}
 execution(MODIFIER * EmployeeManager.*(..))
 {% endhighlight %}
 
-4. Match all methods in EmployeeManager with specific modifier also return type
+* Match all methods in EmployeeManager with specific modifier also return type
  {% highlight java %}
 execution(MODIFIER RETURN-TYPE EmployeeManager.*(..))
 {% endhighlight %}
 
-5. Match methods in EmployeeManager with specific modifier also return type and parameter
+* Match methods in EmployeeManager with specific modifier also return type and parameter
  {% highlight java %}
 execution(MODIFIER RETURN-TYPE EmployeeManager.*(PARAMETER1, ..))
 {% endhighlight %}
 
-6. Math methods in EmployeeManager with specific modifier also return type and parameter, definite parameters
+* Math methods in EmployeeManager with specific modifier also return type and parameter, definite parameters
  {% highlight java %}
 execution(MODIFIER RETURN-TYPE.*(PARAMETER1, DEFINITE, PARAMETER1)) 
 {% endhighlight %}
@@ -145,27 +143,27 @@ execution(MODIFIER RETURN-TYPE.*(PARAMETER1, DEFINITE, PARAMETER1))
 ### 1-2. How to match class type signature patterns
 when applied Spring AOP, the scope of these pointcuts will be narrowed to matching all method executions within the certain types only.
 
-1. Match all methods defined in classes inside specific package
+* Match all methods defined in classes inside specific package
  {% highlight java %}
 within(PACKAGE-PATH.*)
 {% endhighlight %}
 
-2. Match all methods defined in classes inside specific package also classes inside all sub-packages as well
+* Match all methods defined in classes inside specific package also classes inside all sub-packages as well
  {% highlight java %}
 within(PACKAGE-PATH..*)
 {% endhighlight %}
 
-3. Match all methods with a class in another package
+* Match all methods with a class in another package
  {% highlight java %}
 within(PACKAGE-PATH.CLASS-NAME)
 {% endhighlight %}
 
-4. Match all methods with a class in same package
+* Match all methods with a class in same package
  {% highlight java %}
 within(CLASS-NAME)
 {% endhighlight %}
 
-5. Match all methods within all implementing classes of specific interface
+* Match all methods within all implementing classes of specific interface
  {% highlight java %}
 within(INTERFACE-NAME+)
 {% endhighlight %}
@@ -288,6 +286,7 @@ JPA는 영속성 프로그래밍 모델의 간소화를 대표한다. JPA사양�
 - JPA는 현재 작업 중인 데이터베이스에 특정하지 않고 SQL 질의문 작성없이 객체들을 회수할 수 있는 독립적인 EJP 질의 언어들(JPQL로도 알려진)를 포함한 질의 언어를 제공한다.
 <br>
 <br>
+
 ### 3-1-2. Explanation
 
 ### 3-1-3. Remark

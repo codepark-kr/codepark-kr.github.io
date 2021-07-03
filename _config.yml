@@ -5,13 +5,15 @@ url: "https://b2a3e8.github.io"
 
 header_pages:
   - index.md
+  - transcription.md
   - spring-theory.md
+  - spring-boot&JPA.md
   - about.md
   - contact.md
 
 style: dark
 
-gems:
+plugins:
   - jekyll-seo-tag
 
 footer: 'copyright ©codepark.kr@gmail.com'
@@ -19,3 +21,4 @@ footer: 'copyright ©codepark.kr@gmail.com'
 # Build settings
 markdown: kramdown
 remote_theme: b2a3e8/jekyll-theme-console
+highlighter: rouge
