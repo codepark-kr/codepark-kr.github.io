@@ -4,7 +4,7 @@ title: /database
 permalink: /database
 ---
 
-### Spring Boot Theory (frequent update)
+### Database (frequent update)
 
 `21.05.2021-`
 @yb park 
