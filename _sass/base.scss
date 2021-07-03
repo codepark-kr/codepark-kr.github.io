@@ -25,8 +25,8 @@
  */
 $base-font-family:     'Source Serif Pro', 'Noto Sans KR' !default;
 $syntax-highlight-font-family: 'Source Code Pro', 'Noto Sans KR';
-$base-font-size:       13px !default;
-$mobile-font-size:     12px !default;
+$base-font-size:       14px !default;
+$mobile-font-size:     13px !default;
 $base-line-height:     1.7 !default;
 $container-width:      90% !default;
 $container-max-width:  800px !default;
@@ -50,7 +50,7 @@ h1{ font-size: 23px; background-color: #af8c9d; color: #000 !important; margin-t
 h2{ font-size: 19px; margin-bottom: 20px;}
 h3{ font-size: 17px; }
 hr{ margin-top: 20px; margin-bottom: 20px; }
-strong{ color: rgb(75, 155, 149); }
+strong{ color: rgb(108, 199, 193); }
 
 @media only screen and (max-device-width: 500px) { * { font-size: $mobile-font-size !important; } }
 
@@ -121,13 +121,14 @@ textarea { vertical-align: top; }
  * Code and syntax highlighting
  */
 .lineno { color: var(--code-color-1); margin-right: 15px; }
-figure.highlight{ margin: 5px 0; border: 1px solid rgb(59, 58, 58);  margin-bottom: 20px;
-                   width: fit-content; max-width: 800px; margin-left: 14px; padding: 10px; }
-pre,code.highlighter-rouge  { border: none;  padding: 0;  margin: 0;  overflow: auto;  font-size: 1; padding-left: 4px; padding-right: 4px;
-      color: rgb(197, 31, 31); background-color: rgb(39, 39, 39); line-height: 1.7 !important;  font-family: 'Source Code Pro', monospace !important; }
+figure.highlight{ margin: 5px 0; border: 1px solid rgb(59, 58, 58);  margin-bottom: 20px; width: fit-content; max-width: 800px; margin-left: 14px; padding: 10px; }
+pre,code.highlighter-rouge  { border: none;  padding: 0;  margin: 0;  overflow: auto;  font-size: 10pt !important; padding-left: 4px; padding-right: 4px;
+                              background-color: rgb(39, 39, 39); line-height: 1.7 !important;  font-family: 'Source Code Pro', monospace !important; }
+code.highlighter-rouge{ font-size: 10pt; color: rgb(197, 31, 31);}
+code{ font-size: 9pt; font-family: 'Source Code Pro', monospace !important; letter-spacing: -1px; }
 
       .highlight table td { padding: 5px; }
-      .highlight table pre { margin: 0; }
+      .highlight table pre { margin: 0;}
       .highlight, .highlight .w {
         color: #fbf1c7;
         background-color: #282828;

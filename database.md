@@ -329,10 +329,9 @@ User의 인증에 문제가 있기 때문에 발생한다.
 2. `mysql -u root -p` 로 MariaDB를 실행한다.
     이는 root user 권한으로 password를 입력하여 실행한다는 의미이다.
 3. `root@localhost`의 인증 방식을 패스워드로 설정하고, 그 패스워드를 root로 설정해 준다.
-    {% highlight sql %}
-    ALTER USER 'root'@'localhost' IDENTIFIED VIA mysql_native_password USING PASSWORD('root');
-    {% endhighlight %}
-4. 다시 한 번 connection 생성을 시도하면 성공적으로 완료된다.
+    {% highlight sql %} ALTER USER 'root'@'localhost' IDENTIFIED VIA mysql_native_password USING PASSWORD('root'); {% endhighlight %}
+다시 한 번 connection 생성을 시도하면 성공적으로 완료된다.
+
 
 ---
 
@@ -360,7 +359,7 @@ The table spaces are beneficial in database in various ways given as follows:
 
 **저장소 자동 관리:** 데이터베이스 관리자는 필요에 따라 컨테이너를 만들고 확장한다.
 
-**메모리 활용 :** 단일 [Bufferpool¹](https://www.ibm.com/docs/en/db2/11.5?topic=databases-buffer-pools)이 복수의 Tablespace를 관리할 수 있다.    join이나 정렬과 같은 활동의 퍼포먼스를 높이기 위해 임시 Tablespace들을 그들이 소유한 bufferpool에 할당할 수 있다.
+**메모리 활용 :** 단일 [Bufferpool¹](https://www.ibm.com/docs/en/db2/11.5?topic=databases-buffer-pools)이 복수의 Tablespace를 관리할 수 있다. join이나 정렬과 같은 활동의 퍼포먼스를 높이기 위해 임시 Tablespace들을 그들이 소유한 bufferpool에 할당할 수 있다.
 
 ### Container
 Tablespaces contains one or more containers. A container can be a directory name, a device name, or a filename. In a database, a single tablespace can have several containers on the same physical storage device. If the tablespace is created with automatic storage tablespace option, the creation and management of containers handled automatically by the database manager. If it is not created with automatic storage tablespace option, you need to define and manage the containers yourself.
