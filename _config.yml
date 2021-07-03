@@ -9,6 +9,7 @@ header_pages:
   - spring-theory.md
   - spring-boot&JPA.md
   - database.md
+  - debug.md
   - about.md
   - contact.md
 
