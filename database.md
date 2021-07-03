@@ -385,8 +385,7 @@ when you create a new database, the database manager creates some default tables
 
 **Temporary and storage management**: Tablespaces can be setup in different ways, depending on how you want to use them. You can setup the operating system to manage tablespace allocation, you can let the database manager allocate space or you can choose automatic allocation of tablespace for your data. tablespaces는 어떻게 사용하는 지에 따라 다른 방식으로 설정할 수 있다. tablespace 할당을 관리할 operating system을 설정할 수 있으며, database 관리자가 공간을 할당하게 하거나 데이터를 위한 tablespace의 자동 할당을 선택할 수 있다.
 
-***System Catalog²* :** A system catalog is a group of tables and views that incorporate vital details regarding a database. Every database comprised of a system catalog and the information in the system catalog specifies the framework of the database. e.g. the data dictionary/data definition language(DDL) for every table in the database is saved in the system catalog.
-***system catalog**는 데이터에 관해 필수적인 세부 사항들을 포함한 view와 table의 그룹이다. 모든 database는 system catalog와 system catalog가 특정한 database의 framework 내 정보들로 구성된다. 예를 들어, 데이터베이스 내의 모든 테이블들을 위한 DDL이 system catalog에 저장되어 있다.*
+***System Catalog²* :** A system catalog is a group of tables and views that incorporate vital details regarding a database. Every database comprised of a system catalog and the information in the system catalog specifies the framework of the database. e.g. the data dictionary/data definition language(DDL) for every table in the database is saved in the system catalog. ***system catalog**는 데이터에 관해 필수적인 세부 사항들을 포함한 view와 table의 그룹이다. 모든 database는 system catalog와 system catalog가 특정한 database의 framework 내 정보들로 구성된다. 예를 들어, 데이터베이스 내의 모든 테이블들을 위한 DDL이 system catalog에 저장되어 있다.
 
 <br/>
 <h4>The following three types of managed spaces are available :</h4>
@@ -399,8 +398,7 @@ when you create a new database, the database manager creates some default tables
 
 **Automatic Storage Tablespace:** Database server can be managed automatically. Database server creates and extends containers depend on data on database. With automatic storage management, it is not required to provide container definitions. The database server looks after creating and extending containers to make use of the storage allocated to the database. If you add storage space to a storage group, new containers are automatically created when the existing container reach their maximum capacity. if you want to use the newly-added immediately, you can rebalance the tablespace. 데이터베이스 서버는 자동으로 관리될 수 있다. 데이터베이스 서버는 데이터베이스에 올려진 데이터에 따라서 컨테이너들을 생성하고 확장한다. 자동 저장소 관리를 사용한다면 컨테이너 정의의 규정은 필수가 아니다. 데이터베이스 서버는 데이터베이스에 할당된 저장소들을 사용하기 위해 컨테이너 생성 및 확장을 수행한다. storage group에 저장 공간을 추가로 더한다면, 새로운 컨테이너는 기존의 컨테이너가 그들의 최대 용량에 도달했을 때 자동으로 생성된다. 새로 추가된 것을 즉시 사용하고자 한다면 tablespace를 재 조정할 수 있다.
 
-**Page, table and tablespace size:** Temporary DMS and automatic storage tablespaces, the page size you choose for your database determines the maximum limit for the tablespace size. For table SMS and temporary automatic storage tablespaces, the page size constrains the size of table itself. The page sizes can be 4kb, 8kb, 16kb, 32kb.
-임시 DMS(Database managed Space)와 자동 저장소 tablespaces, 데이터베이스를 위한 page size는 tablespace의 최대 크기의 한도를 결정한다. table System managed Space와 임시 자동 저장소 tablespaces, 페이지 크기는 테이블의 크기를 스스로 제한한다. page 크기는 4kb, 8kb, 16kb, 32kb일 수 있다. 
+**Page, table and tablespace size:** Temporary DMS and automatic storage tablespaces, the page size you choose for your database determines the maximum limit for the tablespace size. For table SMS and temporary automatic storage tablespaces, the page size constrains the size of table itself. The page sizes can be 4kb, 8kb, 16kb, 32kb. 임시 DMS(Database managed Space)와 자동 저장소 tablespaces, 데이터베이스를 위한 page size는 tablespace의 최대 크기의 한도를 결정한다. table System managed Space와 임시 자동 저장소 tablespaces, 페이지 크기는 테이블의 크기를 스스로 제한한다. page 크기는 4kb, 8kb, 16kb, 32kb일 수 있다. 
 
 ## 5-4. Syntax
 ## 5-5. Remark
