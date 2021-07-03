@@ -24,7 +24,6 @@ CONTENTS
 
 ---
 
-## 3. Debug
 ### 3-1. [cat.NCDC OPE API] func. ApiInfo012
 ***Problem***
 1. `java.io.FileNotFoundException` occured when request to get response data from API
