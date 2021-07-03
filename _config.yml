@@ -8,6 +8,7 @@ header_pages:
   - transcription.md
   - spring-theory.md
   - spring-boot&JPA.md
+  - database.md
   - about.md
   - contact.md
 
