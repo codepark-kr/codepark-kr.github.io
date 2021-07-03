@@ -121,7 +121,7 @@ mysql -u root -p
 **WSL : Switch the account to root**
 
 {% highlight bash %}
-    su root
+    su - root
 {% endhighlight %}
 
 ---
@@ -325,7 +325,7 @@ User의 인증에 문제가 있기 때문에 발생한다.
 ### Solution
 다음과 같은 순서로 해결한다.
 
-1. `su root` ubuntu shell 창을 켠 후, root 권한으로 실행한다.
+1. `su - root` ubuntu shell 창을 켠 후, root 권한으로 실행한다.
 2. `mysql -u root -p` 로 MariaDB를 실행한다.
     이는 root user 권한으로 password를 입력하여 실행한다는 의미이다.
 3. `root@localhost`의 인증 방식을 패스워드로 설정하고, 그 패스워드를 root로 설정해 준다.
