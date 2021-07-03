@@ -1,31 +1,15 @@
-# Dependencies
-markdown:         kramdown
-highlighter:      rouge
+# Example Site settings
 
-# Setup
-title:            Archive
-tagline:          "@codepark"
-description:      "The Archive from junior Back-end Developer"
-url:              https://codepark.kr
-baseurl:          /
-                  # the optional subpath of your site, e.g. "/my-jekyll-site/"
-                  # This will apply to all pages in your Jekyll site.
+#google_analytics: UA-NNNNNNNN-N
 
-author:
-  name:           codepark
-  url:            https://twitter.com/karloespiritu
+#header_pages:
+#  - index.md
+#  - about.md
 
-paginate:         5
-paginate_path:    '/page:num'
-                    # Or '/my-jekyll-site/page:num' if you want to move your index pages
+#footer: 'follow us on <a href="https://twitter.com/">twitter</a>'
+
+#style: light # dark (default) or light
+#listen_for_clients_preferred_style: true # true or false (default)
 
 plugins:
-  - jekyll-feed
-  - jekyll-gist
-  - jekyll-paginate
-
-# Custom vars
-version:            2.0.1
-
-github:
-  repo:             https://codepark-kr.github.io
+  - jekyll-seo-tag

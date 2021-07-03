@@ -1,18 +1,15 @@
 ---
 layout: page
-title: About
+title: /about
+permalink: /about/
 ---
 
-<p class="message">
-  Hi there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
-</p>
+# jekyll-theme-console
 
-## About BlackDoc Theme
+A jekyll theme with inspiration from linux consoles for hackers, developers and script kiddies.
+You can find the source code for this theme at [github.com/b2a3e8/jekyll-theme-console](https://github.com/b2a3e8/jekyll-theme-console).
 
-Some relevant information about this project:
+## What is jekyll?
 
-* Built for [Jekyll](http://jekyllrb.com)
-* Theme based on [Poole](http://getpoole.com), the Jekyll butler, and the [Hyde](http://hyde.getpoole.com) theme
-* Ideal for sites requiring master-detail layout such as documentation, cheatsheets, lyrics, notes, etc.
-* Need a beautiful color scheme for black background? Then you will love BlackDoc theme.
-
+Jekyll is a simple, blog-aware, static site generator for personal, project, or organization sites. Written in Ruby by Tom Preston-Werner, GitHub's co-founder, it is distributed under an open source license.
+<br />Instead of using databases, Jekyll takes the content, renders Markdown or Textile and Liquid templates, and produces a complete, static website ready to be served by Apache HTTP Server, Nginx or another web server. Jekyll is the engine behind GitHub Pages, a GitHub feature that allows users to host websites based on their GitHub repositories for no additional cost.

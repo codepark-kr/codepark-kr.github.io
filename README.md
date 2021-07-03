@@ -1,126 +1,121 @@
-# BlackDoc
+# jekyll-theme-console
 
-![Jekyll version](https://img.shields.io/badge/Jekyll-3.x-brightgreen.svg?style=flat-square)
+A jekyll theme with inspiration from linux consoles for hackers, developers and script kiddies.
 
-BlackDoc is a two-column [Jekyll](http://jekyllrb.com) theme that's ideal for websites that require a master-detail layout for viewing of content. It's based on [Poole](http://getpoole.com), the Jekyll butler, and the [Hyde](http://hyde.getpoole.com) theme.
+<img src="https://raw.githubusercontent.com/b2a3e8/jekyll-theme-console/master/screenrec-dark.gif" width="550" title="Screenshot">
 
-![BlackDoc screenshot](https://raw.githubusercontent.com/karloespiritu/blackdoc/master/public/images/blackdoc-screenshot.jpg)
+## Demo
 
-## Contents
+[dark style](https://b2a3e8.github.io/jekyll-theme-console-demo-dark/) ([source code](https://github.com/b2a3e8/jekyll-theme-console-demo-dark)):
 
-- [Features](#features)
-- [Quick Start](#quick-start)
-- [Usage](#usage)
-- [Options](#options)
-  - [Sidebar menu](#sidebar-menu)
-  - [Scrolling sidebar content](#scrolling-sidebar-content)
-  - [Themes](#themes)
-  - [Reverse layout](#reverse-layout)
-- [Development](#development)
-- [Author](#author)
-- [License](#license)
-- [Thanks](#thanks)
+[<img src="https://raw.githubusercontent.com/b2a3e8/jekyll-theme-console/master/screenshot-dark.png" width="350" title="Screenshot">](https://b2a3e8.github.io/jekyll-theme-console-demo-dark/)
 
-## Features
 
-* Now compatible with Jekyll 3.x
-* Two-column layout with scrolling sidebar content
-* Ideal for websites that require  master-detail view of content
+[light style](https://b2a3e8.github.io/jekyll-theme-console-demo-light/) ([source code](https://github.com/b2a3e8/jekyll-theme-console-demo-light)):
 
-## Quick Start
+[<img src="https://raw.githubusercontent.com/b2a3e8/jekyll-theme-console/master/screenshot-light.png" width="350" title="Screenshot">](https://b2a3e8.github.io/jekyll-theme-console-demo-light/)
 
-Download the zip file or clone the BlackDoc repo.
 
-```bash
-$ git clone git@github.com:karloespiritu/BlackDoc.git mysite
-$ cd mysite
-```
-Make sure you have Ruby 2.2.5 or higher installed.
+[hacker style](https://b2a3e8.github.io/jekyll-theme-console-demo-hacker/) ([source code](https://github.com/b2a3e8/jekyll-theme-console-demo-hacker)):
 
-```bash
-$ ruby --version
-ruby 2.2.5
-```
+[<img src="https://raw.githubusercontent.com/b2a3e8/jekyll-theme-console/master/screenshot-hacker.png" width="350" title="Screenshot">](https://b2a3e8.github.io/jekyll-theme-console-demo-hacker/)
 
-Install bundler and install dependencies.
 
-```bash
-$ gem install bundler
-$ bundle install
-```
+## Installation
 
-Build and run your BlackDoc site.
+First, follow the steps in [this Quickstart Guide](https://jekyllrb.com/docs/) if you're starting with Jekyll from scratch. Skip this if you already have an existing jekyll project.
 
-```bash
-$ jekyll serve
-```
+**_You can also use the [demo site's source code](https://b2a3e8.github.io/jekyll-theme-console-demo-dark/) as template for an easy start._**
+
+### Remote theme method for GitHub Pages
+
+Use this method for sites hosted with GitHub Pages only. To install:
+
+1. Set `remote_theme` in your project's Jekyll `_config.yml` file:
+
+   ```yaml
+   remote_theme: b2a3e8/jekyll-theme-console
+   ```
+
+### Gem-based method
+
+With Gem-based themes, directories such as the `assets`, `_layouts`, `_includes`, and `_sass` are stored in the theme’s gem, hidden from your immediate view. Yet all of the necessary directories will be read and processed during Jekyll’s build process.
+
+This allows for easier installation and updating as you don't have to manage any of the theme files. To install:
+
+1. Add this line to your Jekyll site's `Gemfile`:
+
+   ```ruby
+   gem "jekyll-theme-console"
+   ```
+
+2. Fetch and update bundled gems by running the following [Bundler](http://bundler.io/) command:
+
+   ```bash
+   bundle
+   ```
+
+3. Set `theme` in your project's Jekyll `_config.yml` file:
+
+   ```yaml
+   theme: jekyll-theme-console
+   ```
+
+To update the theme run `bundle update`.
 
 ## Usage
 
-BlackDoc is a theme built on top of [Poole](https://github.com/poole/poole), which provides a fully furnished Jekyll setup—just download and start the Jekyll server. See [the Poole usage guidelines](https://github.com/poole/poole#usage) for how to install and use Jekyll.
+### _config.yaml
 
+In addition to jekyll's default configuration options, you can provide:
+- `header_pages` to specify which pages should be displayed in navbar
+- `footer` string, which will be inserted on the end of the page (doesn't support markup, but html)
+- `google_analytics` tracking id (tracking will be enabled only in production environments and only if you set this option, no Google Analytics code will be loaded if you don't set this option)
+- `listen_for_clients_preferred_style` boolean, used to allow users to choose light or dark style based on their preferences (mostly affected by OS dark or light theme, details see https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)
+- `style` to specify which predefined style (colors) should be used
 
-## Options
+```yaml
+header_pages:
+  - index.md
+  - about.md
 
-BlackDoc includes some customizable options, typically applied via classes on the `<body>` element.
+style: dark # dark (default), light or hacker
+listen_for_clients_preferred_style: true # false (default) or true
 
+footer: 'follow us on <a href="https://twitter.com/xxx">twitter</a>'
 
-### Sidebar menu
-
-Create a list of nav links in the sidebar by assigning each Jekyll page the correct layout in the page's [front-matter](http://jekyllrb.com/docs/frontmatter/).
-
-```
----
-layout: page
-title: About
----
-```
-
-**Why require a specific layout?** Jekyll will return *all* pages, including the `atom.xml`, and with an alphabetical sort order. To ensure the first link is *Home*, we exclude the `index.html` page from this list by specifying the `page` layout.
-
-
-### Scrolling sidebar content
-
-By default, BlackDoc includes a scrolling sidebar that will display your markdown files in alphabetical order.
-
-### Themes
-
-BlackDoc ships with eight optional themes based on the [base16 color scheme](https://github.com/chriskempson/base16). Apply a theme to change the color scheme (mostly applies to sidebar and links).
-
-To use a theme, add anyone of the available theme classes to the `<body>` element in the `default.html` layout, like so:
-
-```html
-<body class="theme-base-08">
-  ...
-</body>
+google_analytics: UA-NNNNNNNN-N
 ```
 
-To create your own theme, look to the Themes section of [included CSS file](https://github.com/karloespiritu/blackdoc/blob/master/public/css/blackdoc.css). Copy any existing theme (they're only a few lines of CSS), rename it, and change the provided colors.
+### front matter variables
 
-### Reverse layout
+Besides the predefined [front matter](https://jekyllrb.com/docs/front-matter/) variables from jekyll this theme also supports following variables:
+- `title` to set a title for the page
+- `lang` to specify the language, defaults to 'en'
+- `robots` to control the robot meta tag ([details](http://longqian.me/2017/02/12/jekyll-robots-configuration/)) - this may be useful for example to set `NOINDEX` to tag pages
 
-![BlackDoc reverse screenshot](https://raw.githubusercontent.com/karloespiritu/BlackDoc/master/public/images/reverse-screenshot.png)
+## Customization
 
-BlackDoc's page orientation can be reversed with a single class.
+If you want to customize this theme, follow this steps:
+1. Fork this repository (you can use the fork as your own theme or directly as your website)
+2. Create or modify files in `_layouts` directory for html-based changes
+3. Create or modify files in `_sass` and `assets` for css-based changes
+   - You can change things which are used in light and dark theme (like font-size) in `_sass/base.scss`. You'll find style variables at the top.
+   - Style-specific definitions are in `_sass/_dark.scss` respectively in `_sass/_light.scss`. You can change things like background-color there.
 
-```html
-<body class="layout-reverse">
-  ...
-</body>
-```
+## Contributing
 
-## Author
+Bug reports and pull requests are welcome on GitHub at https://github.com/b2a3e8/jekyll-theme-console. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-**Karlo Espiritu**
-- <https://github.com/karloespiritu>
-- <https://twitter.com/karloespiritu>
+## Development
+
+To set up your environment to develop this theme, run `bundle install`.
+
+Your theme is setup just like a normal Jekyll site! To test your theme, run `bundle exec jekyll serve` and open your browser at `http://localhost:4000`. This starts a Jekyll server using your theme. Add pages, documents, data, etc. like normal to test your theme's contents. As you make modifications to your theme and to your content, your site will regenerate and you should see the changes in the browser after a refresh, just like normal.
+
+When your theme is released, only the files in `_layouts`, `_includes`, `_sass` and `assets` tracked with Git will be bundled.
+To add a custom directory to your theme-gem, please edit the regexp in `jekyll-theme-console.gemspec` accordingly.
 
 ## License
 
-Open sourced under the [MIT license](LICENSE.md).
-
-\m/
-
-## Thanks
-
-Thanks to [@mdo](https://twitter.com/mdo) for creating the awesome [Poole](http://getpoole.com) project.
+The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
