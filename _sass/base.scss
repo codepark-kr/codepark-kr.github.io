@@ -29,7 +29,7 @@ $base-font-size:       16px !default;
 $mobile-font-size:     14px !default;
 $base-line-height:     1.7 !default;
 $container-width:      90% !default;
-$container-max-width:  800px !default;
+$container-max-width:  810px !default;
 
 /**
  * Global
@@ -53,9 +53,7 @@ a:hover { color: var(--background-color); background-color: var(--base-color); }
 h1{ font-size: 24px; 
   // background-color: #d17563;
   background-color: #d17563;
-background-image: linear-gradient(90deg, #c46856 99%, #ee941760 1%);
-
- 
+  background-image: linear-gradient(90deg, #c46856 98.6%, #ee941760 1.4%); min-width: fit-content; padding-right: 20px; width: 50%; max-width: 80%;
   color: #000 !important; margin-top: -10px; margin-bottom: 10px; padding-left: 10px;}
 h2{ font-size: 20px; margin-bottom: 20px;}
 h3{ font-size: 18px; }
@@ -69,11 +67,13 @@ strong{ color: rgb(108, 199, 193); }
 /**
  * Layout
  */
-.container { width: $container-width;  max-width: $container-max-width;  margin-right: auto;  margin-left: auto; 
+.container { width: $container-width;  max-width: $container-max-width;  margin-right: auto;  margin-left: auto; margin-top: 40px;
             //  background-color: rgb(10, 10, 10); 
-             background-color: #000000;
+            // border-left: 20px solid rgb(9, 68, 68);
+            border-bottom: 20px solid rgb(6, 70, 70);
+            background-color: #000000;
 background-image: linear-gradient(90deg, #000000 0%, #414141 98%);
-             padding-left: 40px; padding-bottom: 20px;}
+             padding-left: 50px; padding-bottom: 20px;}
 p { word-wrap: break-all;  word-break: break-all;  white-space: pre-wrap; margin-bottom: 15px; hyphens: auto; }
 footer { color: var(--text-color);  border-top: var(--border);  margin: 20px auto 15px;  padding-top: 10px;  text-align: right; }
 header { margin-top: 25px;  margin-bottom: 10px; }
@@ -137,7 +137,7 @@ textarea { vertical-align: top; }
  * Code and syntax highlighting
  */
 .lineno { color: var(--code-color-1); margin-right: 15px; }
-figure.highlight{ margin: 5px 0; border: 1px solid rgb(59, 58, 58);  margin-bottom: 20px; width: fit-content; max-width: 800px; margin-left: 14px; padding: 10px; }
+figure.highlight{ margin: 5px 0; border: 1px solid rgb(59, 58, 58);  margin-bottom: 20px; width: fit-content; max-width: 810px; margin-left: 14px; padding: 10px; }
 pre,code.highlighter-rouge  { border: none;  padding: 0;  margin: 0;  overflow: auto;  font-size: 10pt !important; padding-left: 4px; padding-right: 4px;
                               background-color: rgb(39, 39, 39); line-height: 1.7 !important;  font-family: 'Source Code Pro', monospace !important; }
 code.highlighter-rouge{ font-size: 10pt; color: rgb(204, 27, 27);}
