@@ -185,8 +185,8 @@ bean(*SPECIFIC-KEYWORD)
 In AspectJ, pointcut expressions can be combined with the operators e.g. `&& (and)`, `|| (or)`, and `! (not)`.
 
 1. Match all methods with names ending with Manager and DAO
- {% highlight java %}
-		bean(*SPECIFIC-KEYWORD) || bean(*SPECIFIC-KEYWORD)
+{% highlight java %}
+bean(*SPECIFIC-KEYWORD) || bean(*SPECIFIC-KEYWORD)
 {% endhighlight %}
 ---
 
