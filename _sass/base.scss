@@ -29,7 +29,7 @@ $base-font-size:       16px !default;
 $mobile-font-size:     14px !default;
 $base-line-height:     1.7 !default;
 $container-width:      80% !default;
-$container-max-width:  810px !default;
+$container-max-width:  814px !default;
 
 /**
  * Global
@@ -139,7 +139,7 @@ textarea { vertical-align: top; }
  * Code and syntax highlighting
  */
 .lineno { color: var(--code-color-1); margin-right: 15px; }
-figure.highlight{ margin: 5px 0; border: 1px solid rgb(59, 58, 58);  margin-bottom: 20px; width: fit-content; max-width: $container-max-width; margin-left: 14px; padding: 10px; }
+figure.highlight{ margin: 5px 0; border: 1px solid rgb(59, 58, 58);  margin-bottom: 20px; width: fit-content; max-width: 750px; margin-left: 14px; padding: 10px; }
 pre,code.highlighter-rouge  { border: none;  padding: 0;  margin: 0;  overflow: auto;  font-size: 10pt !important; padding-left: 4px; padding-right: 4px;
                               background-color: rgb(39, 39, 39); line-height: 1.7 !important;  font-family: 'Source Code Pro', monospace !important; }
 code.highlighter-rouge{ font-size: 10pt; color: rgb(204, 27, 27);}
