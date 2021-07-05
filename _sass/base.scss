@@ -62,24 +62,24 @@ strong{ color: rgb(108, 199, 193); }
 
 .post-lists{ list-style-type: none; }
 
-@media only screen and (max-device-width: 500px) { * { font-size: $mobile-font-size !important; } }
 
 /**
- * Layout
- */
+* Layout
+*/
 .container { width: $container-width;  max-width: $container-max-width;  margin-right: auto;  margin-left: auto; margin-top: 40px;
-            //  background-color: rgb(10, 10, 10); 
-            // border-left: 20px solid rgb(9, 68, 68);
-            border-bottom: 20px solid rgb(6, 70, 70);
-            background-color: #000000;
-background-image: linear-gradient(90deg, #000000 0%, #414141 98%);
-             padding-left: 50px; padding-bottom: 20px;}
-p { word-wrap: break-all;  word-break: break-all;  white-space: pre-wrap; margin-bottom: 15px; hyphens: auto; }
-footer { color: var(--text-color);  border-top: var(--border);  margin: 20px auto 15px;  padding-top: 10px;  text-align: right; }
-header { margin-top: 25px;  margin-bottom: 10px; }
-header p { text-align: left;  margin: 0; }
-footer { margin-bottom: 20px; }
-
+  //  background-color: rgb(10, 10, 10); 
+  // border-left: 20px solid rgb(9, 68, 68);
+  border-bottom: 20px solid rgb(6, 70, 70);
+  background-color: #000000;
+  background-image: linear-gradient(90deg, #000000 0%, #414141 98%);
+  padding-left: 50px; padding-bottom: 20px;}
+  p { word-wrap: break-all;  word-break: break-all;  white-space: pre-wrap; margin-bottom: 15px; hyphens: auto; }
+  footer { color: var(--text-color);  border-top: var(--border);  margin: 20px auto 15px;  padding-top: 10px;  text-align: right; }
+  header { margin-top: 25px;  margin-bottom: 10px; }
+  header p { text-align: left;  margin: 0; }
+  footer { margin-bottom: 20px; }
+  
+@media only screen and (max-device-width: 500px) { * { font-size: $mobile-font-size !important; } .container{ width: 100%; padding-left: 20px; padding-right: 20px;} }
 .main-content-container{ padding-right: 30px; padding-bottom: 30px;}
 
 /**
@@ -139,7 +139,7 @@ textarea { vertical-align: top; }
  * Code and syntax highlighting
  */
 .lineno { color: var(--code-color-1); margin-right: 15px; }
-figure.highlight{ margin: 5px 0; border: 1px solid rgb(59, 58, 58);  margin-bottom: 20px; width: fit-content; max-width: 750px; margin-left: 14px; padding: 10px; }
+figure.highlight{ margin: 5px 0; border: 1px solid rgb(59, 58, 58);  margin-bottom: 20px; width: calc(100% - 40px); max-width: 750px; margin-left: 14px; padding: 10px; }
 pre,code.highlighter-rouge  { border: none;  padding: 0;  margin: 0;  overflow: auto;  font-size: 10pt !important; padding-left: 4px; padding-right: 4px;
                               background-color: rgb(39, 39, 39); line-height: 1.7 !important;  font-family: 'Source Code Pro', monospace !important; }
 code.highlighter-rouge{ font-size: 10pt; color: rgb(204, 27, 27);}
