@@ -18,7 +18,6 @@ CONTENTS
 
 ---
 
-
 # 1. Spring Boot basic Annotations
 ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2b8a7759-d6b7-4e9c-89ff-cf5cb2c8acf6/Untitled.png](/uploads/Untitled%20(11).png)
 

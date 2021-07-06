@@ -126,7 +126,7 @@ Kill the System Session and try again.
 
 {% highlight sql %}
 // look up the SID(Session ID) and serial#
-SELECT * FROM V$SESSION;
+SELECT * FROM V$SESSION; 
 
 // kill the system session
 // syntax : ALTER SYSTEM KILL SESSION '[SID], [serial#]';

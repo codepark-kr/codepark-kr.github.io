@@ -75,7 +75,7 @@ _(ATCH.2)_
 ![recordmanage](/uploads/recordmanage.png)
 
 <br/>
- 
+  
 ## 1-3. Liquid Syntax
 ### 1-3-1. syntax highlighter + code block
 
@@ -92,7 +92,7 @@ _(ATCH.2)_
 // e.g. {% raw %}{% link /assets/files/doc.pdf %}{% endraw %}
 {% endhighlight %}
 
-**gem timestamp**
+**timestamp**
 {% highlight ruby %}
 {% raw %}{{ site.time | date_to_rfc822 }}{% endraw %}
 // e.g. {{ site.time | date_to_rfc822 }}
