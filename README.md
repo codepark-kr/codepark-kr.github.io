@@ -5,8 +5,7 @@
 
 ---
 This new archive-blog made with Jekyll also it based on Ruby and SCSS. The whole posts written with Markdown/Liquid Syntax.
-<br>
-This site is published at https://codepark.kr/
+<br> This site is published at https://codepark.kr/
 
 ---
 CONTENTS **_(frequent update)_**
