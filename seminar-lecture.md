@@ -60,9 +60,9 @@ GitHub Pages를 통한 Jekyll 페이지의 생성은 직접 Ruby 기반으로 �
 1. window powershell을 열고, `gem install bundler`를 입력해 bundler gem을 설치한다. 
 2. 새로 생성한 저장소의 `_config.yml` 파일의 `plugin` 또는 `gems`에 선언된 플러그인을 `gem install [PLUGIN NAME]`의 형식으로 설치한다.
 3. 만약, custom domain을 가지고 있다면 연결한다. 도메인을 구입한 사이트의 DNS 관리 창에서 레코드 타입을 `CNAME`으로 설정하고, 설정한 저장소명을 그대로 입력 해 주면 된다. *(ATCH.4)*
-4. 작성한 코드를 `bundle` 명령어로 bundling하고, `jekyll serve`로 jekyll을 실행한다. 이는 `bundler exec jekyll serve`로 한 번에 실행도 가능하다. 
+4. 작성한 코드를 `bundler exec jekyll serve`로 번들링 및 실행한다.
 5. 완성된 jekyll 사이트는 로컬에서 `localhost:4000`에서 접속 및 확인이 가능하다. 실제 도메인으로 접속했을 경우는 별도의 custom 도메인을 연결하지 않았다면 2의 repository 명으로, 별도의 도메인을 연결한 경우에는 해당 도메인을 주소창에 입력하면 반영된 것을 확인 할 수 있다. 단, 로컬에서 실 도메인 반영까지는 약간의 시간이 걸린다.
-6. 로컬에서 bundling 후 push하면 작업 내용이 실 도메인에 반영된다.
+6. 로컬에서 bundling 후 push하면 작업 내용이 실제 페이지에 반영된다.
    
 <br/>
 _(ATCH.1)_
@@ -94,7 +94,8 @@ _(ATCH.2)_
 
 **gem timestamp**
 {% highlight ruby %}
-{{ site.time | date_to_rfc822 }}
+{% raw %}{{ site.time | date_to_rfc822 }}{% endraw %}
+// e.g. {{ site.time | date_to_rfc822 }}
 {% endhighlight %}
 <br/>
 ## 1-4. Conclusion & Result

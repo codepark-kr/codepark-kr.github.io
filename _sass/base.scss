@@ -111,7 +111,7 @@ button, #demo{ cursor: pointer; }
 
 
 .container { width: $container-width;  max-width: $container-max-width;  margin-right: auto;  margin-left: auto; margin-top: 40px;
-  border-bottom: 20px solid rgb(6, 70, 70); 
+  border-bottom: 20px solid rgb(6, 70, 70); display: block;
   // border-top: 1px solid tomato; border-left: 1px solid tomato; border-right: 1px solid tomato;
   background-color: #000000;
   background-image: linear-gradient(90deg, #000000 0%, #414141 98%);

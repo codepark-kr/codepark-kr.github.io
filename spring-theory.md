@@ -68,7 +68,6 @@ AOP provides the way to dynamically add the cross-cutting concern before, after 
     1-3. After Throwing Advice: executes if method exits by throwing an exception.
     1-4. After (finally) Advice: executes after a join point regardless of join point exit whether normally of exceptional return.
     1-5. Around Advice: executes before and after a join point.
-
     기능적인 역할을 하는 모듈. 즉, 실제 비즈니스 로직을 제외한 기능적인 역할을 하는 코드들을 분리, 재사용할 수 있도록 가공한 것. Aspect는 Advice와 Point Cut으로 이루어져있다.
 
 2. Pointcut
@@ -286,6 +285,7 @@ JPA는 영속성 프로그래밍 모델의 간소화를 대표한다. JPA사양�
 - JPA는 현재 작업 중인 데이터베이스에 특정하지 않고 SQL 질의문 작성없이 객체들을 회수할 수 있는 독립적인 EJP 질의 언어들(JPQL로도 알려진)를 포함한 질의 언어를 제공한다.
 <br>
 <br>
+(WIP)
 
 ### 3-1-2. Explanation
 

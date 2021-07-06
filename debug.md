@@ -58,16 +58,16 @@ DFSVsrtCacher.init(frontpach + "C:/Users/codep/Downloads/DFS/GEMD/VSRT", false);
 1-3. add header `Accept: application/json` or `dataType=JSON` to request parameter
 
 {% highlight java %}
-// for adding request params, just add [&dataType=JSON] to request uri. 
+// to adding request params, just add [&dataType=JSON] to request uri. 
 setHeader("Accept", "application/json");
 {% endhighlight %}
 
 1-4. annotate the wrong if statement via `initDFSVsrtWeather@DFSPointVsrtData.java`
 
 {% highlight java %}
-// the weather-ArrayList generated and any values not allocated in. 
+// the weather-ArrayList generated and no values allocated. 
 // but the if-conditional statement checking that arrayLists size.
-// so it must be pass the conditional statement, cannot get any values in that.
+// so it must be pass the conditional statement, cannot get any values.
 public void initDFSVsrtWeather() {
 		int fctCnt = Config_Vsrt.FCT_CNT[Config_Vsrt.V_SKY][this.getAnnTime().getTmSeq()];
 		weather = new ArrayList<ApiInfo012Vo>();
@@ -75,7 +75,7 @@ public void initDFSVsrtWeather() {
 		kstCal.set(Calendar.MINUTE, 30);
 		String kstBaseTm = StringUtils.getFormattedDate(kstCal.getTime(), "yyyyMMddHHmm");
 		kstCal.set(Calendar.MINUTE, 0);
-//		if(weather.size() > 0) { <-
+//		if(weather.size() > 0) { <- problem solve
 {% endhighlight %}
 
 ---
@@ -86,7 +86,7 @@ public void initDFSVsrtWeather() {
 [FAQ How do I increase the permgen size available to Eclipse?](https://wiki.eclipse.org/FAQ_How_do_I_increase_the_permgen_size_available_to_Eclipse%3F)
 
 ***Problem***
-When trying to run the local-server with eclipse, the Permgen Exception occurred too often so the work-efficiency getting lower. (when this exception occurred then need to project clean and restart - sometimes had to shut down eclipse IDE and restart.)   
+When trying to run the local-server with eclipse, the Permgen Exception occurred too often so the work-efficiency getting lower. (when this exception occurred then needed to project clean and restart - sometimes had to shut down eclipse IDE and restart.)   
 
 ***Cause***
 Out of memory. 
@@ -119,7 +119,7 @@ Infinite Loading occurred when trying execute DML statement with Tibero5 DBMS.
 
 ***Cause***
 The SQL session still didn't closed, 
-i.e. Any commit or rollback executed after they request DML statement at before.
+i.e. commit or rollback no executed after they request DML statement at before.
 
 ***Solutions***
 Kill the System Session and try again.
