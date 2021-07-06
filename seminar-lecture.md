@@ -1,6 +1,6 @@
 ---
 layout: page
-title: /seminar-lecture
+title: /seminar&lecture
 permalink: /seminar-lecture
 ---
 ### Seminar & Lecture (frequent update)
