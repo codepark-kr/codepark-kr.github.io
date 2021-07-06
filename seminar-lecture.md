@@ -15,13 +15,17 @@ CONTENTS
     [1-0. Reference](#1-0-reference)
     [1-1. Introduction](#1-1-introduction)
     [1-2. Setting up Development Environment](#1-2-setting-up-development-environment)
-    [1-3. Explanation](#1-3-explanation)
-    [1-4. Syntax & Shell Commands](#1-4-syntax--shell-commands)
-    [1-5. Conclusion & Result](#1-5-conclusion--result)
+        [1-2-1. Installation : Ruby](#1-2-1-installation--ruby)
+        [1-2-2. Create/Fork a Repository as GitHub Pages](#1-2-2-createfork-a-repository-as-github-pages)
+        [1-2-3. Install gems & Bundling, Execution](#1-2-3-install-gems--bundling-execution)
+    [1-3. Liquid Syntax](#1-3-liquid-syntax)
+        [1-3-1. syntax highlighter + code block](#1-3-1-syntax-highlighter--code-block)
+    [1-4. Conclusion & Result](#1-4-conclusion--result)
+    [1-5. Addition](#1-5-addition)
+        [1-5-1. Relative Extensions in Visual Studio Code](#1-relative-extensions-in-visual-studio-code)
+        [1-5-2. Rouge](#2-rouge)
+        [1-5-3. SCSS](#3-scss)
     [1-6. Remark](#1-6-remark)
-        [1. Markdown](#1-markdown)
-        [2. Rouge](#2-rouge)
-        [3. SCSS](#3-scss)
 
 ---
 # 1. Setting up a GitHub Pages site with Jekyll
@@ -88,10 +92,15 @@ _(ATCH.2)_
 // e.g. {% raw %}{% link /assets/files/doc.pdf %}{% endraw %}
 {% endhighlight %}
 
+**gem timestamp**
+~~~ruby
+{{ site.time | date_to_rfc822 }}
+~~~
+<br/>
 ## 1-4. Conclusion & Result
 [codepark.kr](https://www.codepark.kr)
 ## 1-5. Addition
-### 1. Relative Extensions in Visual Studio Code
+### 1-5-1. Relative Extensions in Visual Studio Code
 
 **Markdown All in One**
 ![markdown-ext](/uploads/markdown-ext.png) TOC(Table Of Content)의 생성, 단축키로 markdown 텍스트 효과 대입, 작성 중인 .md(.markdown) 파일의 실시간 프리뷰를 제공 해 주는 extension으로, vscode를 사용해서 Jekyll 블로그를 운영하는 경우 필수인 Extension이다.
@@ -105,7 +114,7 @@ _(ATCH.2)_
 ![code-spellchecker](/uploads/code-spellchecker.png) Jekyll 블로그를 운영하면서 영어로 작성하는 경우가 많다면 추천하는 Spell Checker(맞춤법 검사기). 이 Extension이 여타 English Spell Checker Extension와 차별되는 점은 코드에 사용되는 특수한 영어 단어 등을 용인한다는 것에 있다.
 
 <br/>
-### 2. Rouge
+### 1-5-2. Rouge
 **Rouge는 pure-ruby syntax highlighter로, 간단하게 Syntax Highlighter를 제공하는 gem이다.**
 이를 사용하기 위해서는 다음과 같은 절차를 거친다:
 
@@ -115,7 +124,7 @@ _(ATCH.2)_
 4. `rougify style [STYLE NAME]`을 command line으로 입력하여 css 코드를 복사한 후, 붙여넣고 사용한다.
 
 <br/>
-### 3. SCSS
+### 1-5-3. SCSS
 모든 Jekyll 테마는 아니지만, 상당수의 테마는 순수 CSS가 아닌 SCSS 또는 SASS로 작성되어 있다. Jekyll 사이트를 운영하기 위해서 필요한 문법 수준은 크게 어렵지 않아, 다양한 수치 또는 색상 코드 등을 변수로 선언해 두고 사용한다는 점만 알면 된다. 
 이 문법은 다음과 같이 작성하고 사용한다:
 
