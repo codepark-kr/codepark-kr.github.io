@@ -93,9 +93,9 @@ _(ATCH.2)_
 {% endhighlight %}
 
 **gem timestamp**
-~~~ruby
+{% highlight ruby %}
 {{ site.time | date_to_rfc822 }}
-~~~
+{% endhighlight %}
 <br/>
 ## 1-4. Conclusion & Result
 [codepark.kr](https://www.codepark.kr)
