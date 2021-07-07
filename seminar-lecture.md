@@ -258,3 +258,39 @@ Debug란, 프로그래밍 과정 중에 발생하는 오류나 비정상적인 �
 
 <br/>
 <hr/>
+<br/>
+
+# 4. Docker
+
+## 4-1. Reference
+[Containers vs. Virtual Machines (VMs): What's the Difference?](https://www.netapp.com/blog/containers-vs-vms/)
+[도커와 도커 컨테이너의 이해](https://www.itworld.co.kr/insight/110748)
+[Docker Overview](https://docs.docker.com/get-started/overview/)
+
+<br/>
+
+## 4-2. Introduction
+도커 컨테이너는 일종의 소프트웨어를 소프트웨어 실행에 필요한 모든 것을 포함한 완전한 파일 시스템 안에 감싸, 코드, 런타임, 시스템 도구, 시스템 라이브러리 등 서버에 설치되는 모든 것을 아울러 포장하는 것이다. 이는 실행 중인 환경에 상관없이 어플리케이션이 실행 가능하도록 한다.
+
+<br/>
+
+## 4-3. Explanation
+### 4-3-1. Containers vs. Virtual Machines (VMs): What's the Difference?
+![docker-vm](/uploads/docker-vm.jpg)
+Virtual machines and containers differ in several ways, but the **primary difference is that containers provide a way to virtualize an OS so that multiple workloads can run on a single OS instance. With VMs, the hardware is being virtualized to run multiple OS instances.** 가상 머신과 컨테이너는 몇 차이점이 있지만, 가장 주요한 차이점은 container는 os 위에 가상화하는 방법을 제공하여 여러 workload가 하나의 OS 인스턴스에 실행될 수 있게 한다. VM은, 여러 OS 인스턴스에 실행될 수 있게 하드웨어가 가상화된다. 즉, 가상 머신은 완전한 컴퓨터로 항상 guest OS를 설치해야 한다. 따라서 이미지 내부에 OS가 포함되기 때문에 이미지의 용량이 커지게 되며, OS 가상화에만 주력하므로 배포 관리 기능이 부족해지게 된다. 이에 반해 리눅스 컨테이너인 Docker는 실행 파일을 호스트에서 직접 실행, 즉 운영체제로부터 어플리케이션을 분리하기 때문에 컨테이너 런타임 환경을 지원하는 모든 리눅스 서버로 컨테이너를 옮길 수 있다.
+
+<br/>
+
+### 4-3-2. Architecture of Docker
+
+
+~~~shell
+docker build
+docker pull
+docker run
+~~~
+
+### 4-3-3. Docker Hub
+
+## 4-4. Syntax
+## 4-5. Remark
