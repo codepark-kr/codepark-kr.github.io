@@ -21,7 +21,7 @@ CONTENTS
     [1-3. Liquid Syntax](#1-3-liquid-syntax)
         [1-3-1. syntax highlighter + code block](#1-3-1-syntax-highlighter--code-block)
     [1-4. Conclusion & Result](#1-4-conclusion--result)
-    [1-5. Addition](#1-5-addition)
+    [1-5. See Also](#1-5-See-Also)
         [1-5-1. Relative Extensions in Visual Studio Code](#1-relative-extensions-in-visual-studio-code)
         [1-5-2. Rouge](#2-rouge)
         [1-5-3. SCSS](#3-scss)
@@ -100,7 +100,7 @@ _(ATCH.2)_
 <br/>
 ## 1-4. Conclusion & Result
 [codepark.kr](https://www.codepark.kr)
-## 1-5. Addition
+## 1-5. See Also
 ### 1-5-1. Relative Extensions in Visual Studio Code
 
 **Markdown All in One**
@@ -112,7 +112,7 @@ _(ATCH.2)_
 <br/>
 
 **Code Spell Checker**
-![code-spellchecker](/uploads/code-spellchecker.png) Jekyll 블로그를 운영하면서 영어로 작성하는 경우가 많다면 추천하는 Spell Checker(맞춤법 검사기). 이 Extension이 여타 English Spell Checker Extension와 차별되는 점은 코드에 사용되는 특수한 영어 단어 등을 용인한다는 것에 있다.
+![code-spellchecker](/uploads/code-spellchecker.png) Jekyll 블로그를 운영하면서 영어를 작성하는 경우가 많다면 추천하는 Spell Checker(맞춤법 검사기). 이 Extension이 여타 English Spell Checker Extension과 차별되는 점은 코드에 사용되는 특수한 영어 단어 등을 용인한다는 것에 있다.
 
 <br/>
 ### 1-5-2. Rouge
