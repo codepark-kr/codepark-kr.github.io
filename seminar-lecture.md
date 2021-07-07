@@ -153,3 +153,108 @@ a:hover { color: var(--background-color); background-color: var(--base-color); }
 * *gems¹* : Ruby 내 라이브러리, 즉 플러그인의 통칭. yml 설정 파일에서의 항목명은 plugin으로 변경되었다. 
 <br/>
 <hr>
+
+# 2. Jenkins, AWS
+![jenkinsman](/uploads/jenkinsman.jpg)
+
+
+## 2-1. Reference
+[Docker - Jenkins Official Documentation](https://www.jenkins.io/doc/book/installing/docker/)
+[Jenkins란 무엇이며 왜 사용해야 할까요?](https://jjeongil.tistory.com/810#:~:text=Jenkins%EB%A5%BC%20%EC%82%AC%EC%9A%A9%ED%95%98%EB%A9%B4%20%EC%BD%94%EB%93%9C,%EC%97%90%20%EB%B6%80%EC%9D%91%ED%95%A0%20%EC%88%98%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4.)
+[CI/CD 파이프라인이란?](https://www.redhat.com/ko/topics/devops/what-cicd-pipeline)
+<br/>
+
+## 2-2. Introduction
+1.**Jenkins:** 소프트웨어 개발 시 지속적으로 통합 서비스를 제공하는 툴. 일종의 스케줄러. Continuos Integration, Continuos Deployment(CI/CD:지속적 통합)을 가능하게 하는 파이프라인을 작성된 스케줄에 따라 실행하도록 한다. 
+1. **AWS S3(Amazon Web Service Simple Storage Service):** 인터넷 스토리지 서비스. 
+2. **AWS CDN:** 전 세계적으로 분산되어 있는 서버 네트워크. 캐시 서버를 활용한 컨텐츠 전송 기술. CDN은 이미지 등의 컨텐츠의 원본 이미지 파일을 해당 국가의 서버에 저장하고, 이를 복사하여 전 세계 서버에 복사(Caching)해 주는 서비스. 따라서 해당 이미지가 저장된 국가의 서버가 아니더라도 접속자와 가장 가까운 서버에서 해당 컨텐츠에 접근할 수 있도록 한다.
+3. **WIX Tools:** 파일 리스트를 exe, msi 설치 파일로 생성 할 수 있도록 만들 수 있는 툴
+4. **AutoUpdate:** 프로그램 업데이트 오픈 소스 활용
+
+<br/>
+
+## 2-3. How to Use - Jenkins
+1. jenkins의 설치를 위한 shell을 입력한다. *(ATCH.1)*
+2. Docker에 jenkins Init Admin Password를 입력한다.
+3. Dashboard -> General에서 해당 프로젝트를 어떻게 사용할 지에 대한 Description을 작성한다.
+4. 고급 프로젝트 옵션 -> 소스코드 관리 메뉴에서 작성한 프로젝트를 젠킨스에 있는 폴더 위치에서 클론해서 가져온다.
+5. 프로젝트를 빌드한 후 다른 프로젝트를 연쇄하여 빌드하는 경우 관련된 옵션을 설정 해 줄 수 있다.
+6. 빌드 시에 자신이 만든 shell을 실행해서 그에 맞는 빌드를 할 수 있도록 옵션을 설정 할 수 있다. 이 중, shell execution을 설정하는 경우 원하는 command를 직접 작성 후 설정해서 빌드 이후 실행이 가능하다. shell script의 경우 본인에게 편한 방식으로 작성하면 되며, window shell 역시 지원된다.
+
+<br/>
+
+## 2-4. Explanation - AWS S3 & CDN
+1. CloudFront Distributions에서 설정되어 있는 도메인이 CDN을 통해서 S3를 가져올 수 있도록 설정이 되어있으며 이를 확인 할 수 있다.
+2. CDN을 사용할 때는 `Domain Name@CloudFront Distributions`의 도메인으로 접근이 가능하다.
+3. 초기에 도메인 접속 시에는 setip파일이 존재하지 않기 때문에 일정 시간이 소요되고, 해당 파일이 다운로드 된 후에는 보다 향상된 속도로 접근이 가능하다.
+
+<br/>
+
+*(ATCH.1)*
+~~~shell
+sudo apt install jenkins
+
+docker pull jenkins/jenkins:lts
+docker volume create jenkins_home
+jenkins/jenkins_lts
+
+source vi jenkins_install_script.sh
+
+docker exec -it jenkins-master-2 bash
+~~~ 
+
+<br/>
+
+## 2-5. Additional Theory
+
+<br/>
+
+## 2-6. Remark
+
+<br/>
+<hr/>
+
+# 3. Debug
+## 3-1. Reference
+
+## 3-2. Introduction
+Debug란, 프로그래밍 과정 중에 발생하는 오류나 비정상적인 연산, 즉 버그를 차고 수정하는 과정을 말한다. 즉, 프로그램을 조사하면서 프로그램이 실행되는 과정을 지켜보는 것을 말 한다.
+디버깅 방법에는 다음과 같은 크게 3가지 분류가 존재한다:
+
+1. 코드 줄 출력 - 정보를 출력하는 줄을 추가하는 식으로 프로그램을 수정하는 방법
+2. 로깅: 로그의 형태로 프로그램 실행을 언제나 확인할 수 있는 방법
+3. 디버깅 도구(Debugger) 사용
+
+<br/>
+
+### Java Platform Debugger Architecture (JPDA)
+1. java Virtual Machine Tool Interface (JVMTI, JVM Tool Interface)
+2. Java Debug Line Protocol (JDWP, Java Debug Write Protocol)
+3. Java Debug Interface (JDI, Java Debug Interface)
+
+<br/>
+![java-debug-architecture](/uploads/debug-architecture.jpg)
+<br/>
+
+### Debugger - Breakpoint
+1. Step Over line 단위 실행
+2. Step into 함수 내부로 진입
+3. Step out (Step Return) 함수를 끝까지 실행시키고 호출 시킨 곳으로 되돌아감
+4. Resume: 다음 중단점(Breakpoint)를 만날 때까지 실행
+5. 특정 조건을 추가로 걸어 중단점(Breakpoint)를 설정할 수 있다.
+
+<br/>
+
+### Debug perspective의 구성 요소
+1. Frames(= Call-stack in Frame)
+2. Variables(Watch, Variables, Expressions)
+
+<br/>
+
+## 3-3. Explanation
+
+## 3-4. Syntax 
+## 3-5. Remark
+
+<br/>
+<hr/>
