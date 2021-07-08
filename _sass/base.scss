@@ -40,7 +40,7 @@ body {
       min-width: 360px;
       margin: 0 auto;  padding: 0;  font-family: $base-font-family; 
        font-size: $base-font-size;  color: var(--text-color);  text-align: left;  line-height: $base-line-height !important; }
-img{ width: auto; height: auto; max-width: $container-max-width; margin-bottom: 14px;  object-fit: cover; display: block; 
+img{ width: auto; height: auto; max-width: $container-width; margin-bottom: 14px;  object-fit: cover; display: block; 
      margin-left: auto; margin-right: auto;}
 // img:hover{ height: 100%; transition: cubic-bezier(0.075, 0.82, 0.165, 1), 10s; }
 
