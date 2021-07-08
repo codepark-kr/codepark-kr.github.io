@@ -11,46 +11,46 @@ permalink: /seminar-lecture
 ---
 
 CONTENTS
-- [1. Setting up a GitHub Pages site with Jekyll](#1-setting-up-a-github-pages-site-with-jekyll)
-  - [1-0. Reference](#1-0-reference)
-  - [1-1. Introduction](#1-1-introduction)
-  - [1-2. Setting up Development Environment](#1-2-setting-up-development-environment)
-    - [1-2-1. Installation : Ruby](#1-2-1-installation--ruby)
-    - [1-2-2. Create/Fork a Repository as GitHub Pages](#1-2-2-createfork-a-repository-as-github-pages)
-    - [1-2-3. Install gems & Bundling, Execution](#1-2-3-install-gems--bundling-execution)
-  - [1-3. Liquid Syntax](#1-3-liquid-syntax)
-    - [1-3-1. syntax highlighter + code block](#1-3-1-syntax-highlighter--code-block)
-  - [1-4. Conclusion & Result](#1-4-conclusion--result)
-  - [1-5. See Also](#1-5-see-also)
-    - [1-5-1. Relative Extensions in Visual Studio Code](#1-5-1-relative-extensions-in-visual-studio-code)
-    - [1-5-2. Rouge](#1-5-2-rouge)
-    - [1-5-3. SCSS](#1-5-3-scss)
-  - [1-6. Remark](#1-6-remark)
-- [2. Jenkins, AWS](#2-jenkins-aws)
-  - [2-1. Reference](#2-1-reference)
-  - [2-2. Introduction](#2-2-introduction)
-  - [2-3. How to Use - Jenkins](#2-3-how-to-use---jenkins)
-  - [2-4. Explanation - AWS S3 & CDN](#2-4-explanation---aws-s3--cdn)
-  - [2-5. Additional Theory](#2-5-additional-theory)
-  - [2-6. Remark](#2-6-remark)
-- [3. Debug](#3-debug)
-  - [3-1. Reference](#3-1-reference)
-  - [3-2. Introduction](#3-2-introduction)
-    - [Java Platform Debugger Architecture (JPDA)](#java-platform-debugger-architecture-jpda)
-    - [Debugger - Breakpoint](#debugger---breakpoint)
-    - [Debug perspective의 구성 요소](#debug-perspective의-구성-요소)
-  - [3-3. Explanation](#3-3-explanation)
-  - [3-4. Syntax](#3-4-syntax)
-  - [3-5. Remark](#3-5-remark)
-- [4. Docker](#4-docker)
-  - [4-1. Reference](#4-1-reference)
-  - [4-2. Introduction](#4-2-introduction)
-  - [4-3. Explanation](#4-3-explanation)
-    - [4-3-1. Containers vs. Virtual Machines (VMs): What's the Difference?](#4-3-1-containers-vs-virtual-machines-vms-whats-the-difference)
-    - [4-3-2. Architecture of Docker](#4-3-2-architecture-of-docker)
-    - [4-3-3. Docker Hub](#4-3-3-docker-hub)
-  - [4-4. Syntax](#4-4-syntax)
-  - [4-5. Remark](#4-5-remark)
+[1. Setting up a GitHub Pages site with Jekyll](#1-setting-up-a-github-pages-site-with-jekyll)
+    [1-0. Reference](#1-0-reference)
+    [1-1. Introduction](#1-1-introduction)
+    [1-2. Setting up Development Environment](#1-2-setting-up-development-environment)
+        [1-2-1. Installation : Ruby](#1-2-1-installation--ruby)
+        [1-2-2. Create/Fork a Repository as GitHub Pages](#1-2-2-createfork-a-repository-as-github-pages)
+        [1-2-3. Install gems & Bundling, Execution](#1-2-3-install-gems--bundling-execution)
+    [1-3. Liquid Syntax](#1-3-liquid-syntax)
+        [1-3-1. syntax highlighter + code block](#1-3-1-syntax-highlighter--code-block)
+    [1-4. Conclusion & Result](#1-4-conclusion--result)
+    [1-5. See Also](#1-5-see-also)
+        [1-5-1. Relative Extensions in Visual Studio Code](#1-5-1-relative-extensions-in-visual-studio-code)
+        [1-5-2. Rouge](#1-5-2-rouge)
+        [1-5-3. SCSS](#1-5-3-scss)
+    [1-6. Remark](#1-6-remark)
+[2. Jenkins, AWS](#2-jenkins-aws)
+    [2-1. Reference](#2-1-reference)
+    [2-2. Introduction](#2-2-introduction)
+    [2-3. How to Use Jenkins](#2-3-how-to-use---jenkins)
+    [2-4. Explanation AWS S3 & CDN](#2-4-explanation---aws-s3--cdn)
+    [2-5. Additional Theory](#2-5-additional-theory)
+    [2-6. Remark](#2-6-remark)
+[3. Debug](#3-debug)
+    [3-1. Reference](#3-1-reference)
+    [3-2. Introduction](#3-2-introduction)
+        [Java Platform Debugger Architecture (JPDA)](#java-platform-debugger-architecture-jpda)
+        [Debugger Breakpoint](#debugger---breakpoint)
+        [Debug perspective의 구성 요소](#debug-perspective의-구성-요소)
+    [3-3. Explanation](#3-3-explanation)
+    [3-4. Syntax](#3-4-syntax)
+    [3-5. Remark](#3-5-remark)
+[4. Docker](#4-docker)
+    [4-1. Reference](#4-1-reference)
+    [4-2. Introduction](#4-2-introduction)
+    [4-3. Explanation](#4-3-explanation)
+        [4-3-1. Containers vs. Virtual Machines (VMs): What's the Difference?](#4-3-1-containers-vs-virtual-machines-vms-whats-the-difference)
+        [4-3-2. Architecture of Docker](#4-3-2-architecture-of-docker)
+        [4-3-3. Docker Hub](#4-3-3-docker-hub)
+    [4-4. Syntax](#4-4-syntax)
+    [4-5. Remark](#4-5-remark)
 
 ---
 # 1. Setting up a GitHub Pages site with Jekyll
@@ -58,7 +58,7 @@ CONTENTS
 ## 1-0. Reference
 [Jekyll Library Official Doc](https://jekyllrb.com/docs/)
 [Jekyll Themes(Free, Open source)](http://jekyllthemes.org/)
-[Jekyll 기반의 GitHub Page 생성(1) - 환경설정](https://moon9342.github.io/jekyll-start)
+[Jekyll 기반의 GitHub Page 생성(1) 환경설정](https://moon9342.github.io/jekyll-start)
 [What is a Gem?](https://guides.rubygems.org/what-is-a-gem/)
 [Liquid Syntax :: Official Docs](https://jekyllrb.com/docs/liquid/)
 
@@ -184,7 +184,7 @@ a:hover { color: var(--background-color); background-color: var(--base-color); }
 
 
 ## 2-1. Reference
-[Docker - Jenkins Official Documentation](https://www.jenkins.io/doc/book/installing/docker/)
+[Docker Jenkins Official Documentation](https://www.jenkins.io/doc/book/installing/docker/)
 [Jenkins란 무엇이며 왜 사용해야 할까요?](https://jjeongil.tistory.com/810#:~:text=Jenkins%EB%A5%BC%20%EC%82%AC%EC%9A%A9%ED%95%98%EB%A9%B4%20%EC%BD%94%EB%93%9C,%EC%97%90%20%EB%B6%80%EC%9D%91%ED%95%A0%20%EC%88%98%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4.)
 [CI/CD 파이프라인이란?](https://www.redhat.com/ko/topics/devops/what-cicd-pipeline)
 <br/>
@@ -198,7 +198,7 @@ a:hover { color: var(--background-color); background-color: var(--base-color); }
 
 <br/>
 
-## 2-3. How to Use - Jenkins
+## 2-3. How to Use Jenkins
 1. jenkins의 설치를 위한 shell을 입력한다. *(ATCH.1)*
 2. Docker에 jenkins Init Admin Password를 입력한다.
 3. Dashboard -> General에서 해당 프로젝트를 어떻게 사용할 지에 대한 Description을 작성한다.
@@ -208,7 +208,7 @@ a:hover { color: var(--background-color); background-color: var(--base-color); }
 
 <br/>
 
-## 2-4. Explanation - AWS S3 & CDN
+## 2-4. Explanation AWS S3 & CDN
 1. CloudFront Distributions에서 설정되어 있는 도메인이 CDN을 통해서 S3를 가져올 수 있도록 설정이 되어있으며 이를 확인 할 수 있다.
 2. CDN을 사용할 때는 `Domain Name@CloudFront Distributions`의 도메인으로 접근이 가능하다.
 3. 초기에 도메인 접속 시에는 setip파일이 존재하지 않기 때문에 일정 시간이 소요되고, 해당 파일이 다운로드 된 후에는 보다 향상된 속도로 접근이 가능하다.
@@ -246,7 +246,7 @@ docker exec -it jenkins-master-2 bash
 Debug란, 프로그래밍 과정 중에 발생하는 오류나 비정상적인 연산, 즉 버그를 차고 수정하는 과정을 말한다. 즉, 프로그램을 조사하면서 프로그램이 실행되는 과정을 지켜보는 것을 말 한다.
 디버깅 방법에는 다음과 같은 크게 3가지 분류가 존재한다:
 
-1. 코드 줄 출력 - 정보를 출력하는 줄을 추가하는 식으로 프로그램을 수정하는 방법
+1. 코드 줄 출력 정보를 출력하는 줄을 추가하는 식으로 프로그램을 수정하는 방법
 2. 로깅: 로그의 형태로 프로그램 실행을 언제나 확인할 수 있는 방법
 3. 디버깅 도구(Debugger) 사용
 
@@ -261,7 +261,7 @@ Debug란, 프로그래밍 과정 중에 발생하는 오류나 비정상적인 �
 ![java-debug-architecture](/uploads/debug-architecture.jpg)
 <br/>
 
-### Debugger - Breakpoint
+### Debugger Breakpoint
 1. Step Over line 단위 실행
 2. Step into 함수 내부로 진입
 3. Step out (Step Return) 함수를 끝까지 실행시키고 호출 시킨 곳으로 되돌아감
