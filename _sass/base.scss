@@ -31,6 +31,8 @@ $base-line-height:     1.6 !default;
 $container-width:      80% !default;
 $container-max-width:  910px !default;
 
+
+
 /**
  * Global
  */
@@ -130,6 +132,23 @@ button, #demo{ cursor: pointer; }
              .main-content-container{ padding-right: 20px; } }
 
 mark{ background-color: white; color: black; font-weight: bold;}
+
+
+.content-wrapper{
+  text-align: left;
+}
+
+
+.cont-en{
+  width: 40%;
+  max-width: 450px;
+}
+
+.cont-kr{
+  width: 40%;
+  max-width: 450px;
+}
+
 
 
 /**
