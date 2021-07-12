@@ -17,6 +17,80 @@ CONTENTS
     [1-1. The browsers we will talk about](#1-1-the-browsers-we-will-talk-about)
     [1-2. The browser's main functionality](#1-2-the-browsers-main-functionality)
     [1-3. The browser's high level structure](#1-3-the-browsers-high-level-structure)
+[2. The rendering engine](#2-the-rendering-engine)
+    [2-1. Rendering engines](#2-1-rendering-engines)
+    [2-2. The main flow](#2-2-the-main-flow)
+    [2-3. Main flow examples](#2-3-main-flow-examples)
+[3. Parsing and DOM tree construction](#3-parsing-and-dom-tree-construction)
+    [3-1. Parsing-general](#3-1-parsing-general)
+    [3-2. Grammars](#3-2-grammars)
+    [3-3. Parser-Lexer Combination](#3-3-parser-lexer-combination)
+    [3-4. Translation](#3-4-translation)
+    [3-5. Parsing example](#3-5-parsing-example)
+    [3-6. Formal definitions for vocabulary and syntax](#3-6-formal-definitions-for-vocabulary-and-syntax)
+    [3-7. Types of parsers](#3-7-types-of-parsers)
+    [3-8. Generating parsers automatically](#3-8-generating-parsers-automatically)
+[4. HTML Parser](#4-html-parser)
+    [4-1. The HTML grammar definition](#4-1-the-html-grammar-definition)
+    [4-2. Not a context free grammar](#4-2-not-a-context-free-grammar)
+    [4-3. HTML DTD](#4-3-html-dtd)
+    [4-4. DOM](#4-4-dom)
+    [4-5. The parsing algorithm](#4-5-the-parsing-algorithm)
+    [4-6. The tokenization algorithm](#4-6-the-tokenization-algorithm)
+    [4-7. Tree construction algorithm](#4-7-tree-construction-algorithm)
+    [4-8. Actions when the parsing is finished](#4-8-actions-when-the-parsing-is-finished)
+    [4-9. Browser's error tolerance](#4-9-browsers-error-tolerance)
+        [</br> instead of](#br-instead-of-br)
+        [A stray table](#a-stray-table)
+        [Nested form elements](#nested-form-elements)
+        [A too deep tag hierarchy](#a-too-deep-tag-hierarchy)
+        [Misplaced html or body tags](#misplaced-html-or-body-tags)
+[5. CSS parsing](#5-css-parsing)
+    [5-1. WebKit CSS parser](#5-1-webkit-css-parser)
+[6. The order of processing  scripts and style sheets](#6-the-order-of-processing--scripts-and-style-sheets)
+    [6-1. Scripts](#6-1-scripts)
+    [6-2. Speculative parsing](#6-2-speculative-parsing)
+    [6-3. Style sheets](#6-3-style-sheets)
+[7. Renter tree construction](#7-renter-tree-construction)
+    [7-1. The render tree relation to the DOM tree](#7-1-the-render-tree-relation-to-the-dom-tree)
+    [7-2. The flow of constructing the ree](#7-2-the-flow-of-constructing-the-ree)
+    [7-3. Style Computation](#7-3-style-computation)
+    [7-4. Sharing style data](#7-4-sharing-style-data)
+    [7-5. Firefox rule tree](#7-5-firefox-rule-tree)
+        [7-5-1. Division into structs](#7-5-1-division-into-structs)
+        [7-5-2. Computing the style contexts using the rule tree](#7-5-2-computing-the-style-contexts-using-the-rule-tree)
+[8. Manipulating the rules for an easy match](#8-manipulating-the-rules-for-an-easy-match)
+    [8-1. Applying the rules in the correct cascade order](#8-1-applying-the-rules-in-the-correct-cascade-order)
+    [8-2. Style sheet cascade order](#8-2-style-sheet-cascade-order)
+    [8-3. Specificity](#8-3-specificity)
+    [8-4. Sorting the rules](#8-4-sorting-the-rules)
+    [8-5. Gradual process](#8-5-gradual-process)
+[9. Layout](#9-layout)
+    [9-1. Dirty bit system](#9-1-dirty-bit-system)
+    [9-2. Global and incremental layout](#9-2-global-and-incremental-layout)
+    [9-3. Asynchronous and Synchronous layout](#9-3-asynchronous-and-synchronous-layout)
+    [9-4. Optimizations](#9-4-optimizations)
+    [9-5. The layout process](#9-5-the-layout-process)
+    [9-6. Width calculation](#9-6-width-calculation)
+    [9-7. Line Breaking](#9-7-line-breaking)
+[10. Painting](#10-painting)
+    [10-1. Global and Incremental](#10-1-global-and-incremental)
+    [10-2. The painting order](#10-2-the-painting-order)
+    [10-3. Firefox display list](#10-3-firefox-display-list)
+    [10-4. WebKit rectangle storage](#10-4-webkit-rectangle-storage)
+    [10-5. Dynamic changes](#10-5-dynamic-changes)
+    [10-6. The rendering engine's threads](#10-6-the-rendering-engines-threads)
+    [10-7. Event loop](#10-7-event-loop)
+[11. CSS2 visual model](#11-css2-visual-model)
+    [11-1. The canvas](#11-1-the-canvas)
+    [11-2. CSS Box model](#11-2-css-box-model)
+    [11-3. Positioning scheme](#11-3-positioning-scheme)
+    [11-4. Box types](#11-4-box-types)
+    [11-5. Positioning](#11-5-positioning)
+        [11-5-1. Relative](#11-5-1-relative)
+        [11-5-2. Floats](#11-5-2-floats)
+        [11-5-3. Absolute and fixed](#11-5-3-absolute-and-fixed)
+    [11-6. Layered representation](#11-6-layered-representation)
     
 ---
 
@@ -175,11 +249,15 @@ WebKit users two well known parser generators: Flex for creating a lexer and Bis
 
 <br/>
 
+
 # 4. HTML Parser
 The job of the HTML parser is to parse the HTML markup into a parse tree.
 
 ## 4-1. The HTML grammar definition
 The vocabulary and syntax of HTML are defined in specification create by the W3C organization.
+
+<br/>
+
 
 ## 4-2. Not a context free grammar
 As we have seen in the parsing introduction, grammar syntax can be defined formally using formats like BNF.
@@ -190,10 +268,16 @@ This appears strange at first sight; HTML is rather close to XML. There are lots
 The difference is that the HTML approach is more "forgiving": it lets you omit certain tags (which are then added implicitly), or sometimes omit start and end tags, and so on. On the whole it's a "soft" syntax, as opposed to XML's stiff and demanding syntax.
 This seemingly small detail makes a world of a difference. On one hand this is the main reason why HTML is so popular: it forgives your mistakes and makes life easy for the web author. On the other hand, it makes it difficult to write a formal grammar. So to summarize, HTML cannot be parsed easily by conventional parsers, since its grammar is not context free. HTML cannot be parsed by XML parsers.
 
+<br/>
+
+
 ## 4-3. HTML DTD
 HTML definition is in a DTD format. This format is used to define languages of the [SGML(Standard Generalized Markup Language)](https://en.wikipedia.org/wiki/Standard_Generalized_Markup_Language) family. The format contains definitions for all allowed elements, their attributes and hierarchy. As we say earlier, the HTML DTD doesn't form a context free grammar.
 
 There are a few variations of the DTD. The strict mode conforms solely to the specifications but other modes contain support for markup used by browsers in the past. The purpose is backward compatibility with older content. The current strict DTD is here: [www.w3.org/TR/html4/strict.dtd](www.w3.org/TR/html4/strict.dtd). 
+
+
+<br/>
 
 ## 4-4. DOM
 The output tree (the "parse tree") is a tree of DOM element and attribute nodes. DOM is short for Document Object Model. It is the object presentation of the HTML document and the interface of HTML elements to the outside world like JavaScript. 
@@ -221,6 +305,9 @@ Like HTML, DOM is specified by the W3C organization. See [https://www.w3.org/DOM
 
 When I say the tree contains DOM nodes, I mean the tree is constructed of elements that implement one of the DOM interfaces. Browsers use concrete implementations that have other attributes used by the browser internally.
 
+<br/>
+
+
 ## 4-5. The parsing algorithm
 As we saw in the previous sections, HTML cannot be parsed using the regular top down or bottom up parsers.
 
@@ -238,6 +325,9 @@ Tokenization is the lexical analysis, parsing the input into tokens. Among HTML 
 The tokenizer recognizes the token. gives it to the tree constructor, and consumes the next character for recognizing the next token, and so on until the end of the input.
 
 ![htmlparsingflow](/uploads/htmlparsingflow.png) *Figure: HTML parsing flow(taken from HTML5 spec)*
+
+<br/>
+
 
 ## 4-6. The tokenization algorithm
 The algorithm's output is an HTML token. The algorithm is expressed as a state machine. Each state consumes one or more characters of the input stream and updates the next state according to those characters. The decision in influenced by the current tokenization state and by the tree construction state. This means the same consumed character will yield different results for the correct next state, depending on the current state. The algorithm is too complex to describe fully, so let's see a simple example that will help us understand the principle.
@@ -261,6 +351,9 @@ When the &gt; tag is reached, the current token is emitted and the state changes
 We are now back at the **"Tag open state"**. Consuming the next input / will cause creation of an `end tag token` and a move to the **"Tag name state"**. Again we stay in this state until we react &gt;. Then the new tag token will be emitted and we go back to the **"Data state"**. The `</html>` input will be treated luke the previous case.
 
 ![tokenizingthe](/uploads/tokenizingthe.png) *Figure: Tokenizing the example input*
+
+<br/>
+
 
 ## 4-7. Tree construction algorithm
 
@@ -290,11 +383,17 @@ The receiving of the body end token will cause a transfer to **"after body"** mo
 
 ![treeconstruction](/uploads/treeconstruction.jpg) *Figure: tre construction of example html*
 
+<br/>
+
+
 
 ## 4-8. Actions when the parsing is finished
 At this stage the browser will mark the document as interactive and start parsing scripts that are in "deferred" mode: those that should be executed after the document is parsed. The document state will be then set to "complete" and a "load" event will be fired.
 
 You can see [the full algorithms for tokenization and tree construction in the HTML5 specification](https://html.spec.whatwg.org/multipage/parsing.html#html-parser).
+
+<br/>
+
 
 ## 4-9. Browser's error tolerance
 
@@ -334,6 +433,9 @@ The HTML5 specification does define some of these requirements. (WebKit summariz
 
 <br/>
 Let's see some WebKit error tolerance examples: 
+
+<br/>
+
 
 ### &lt;/br&gt; instead of &lt;br&gt;
 
@@ -512,8 +614,14 @@ WebKit uses Flex and Bison parser generators to create parsers automatically fro
 ## 6-1. Scripts
 The model of the web is synchronous. Authors expect scripts to be parsed and executed immediately when the parser reaches a `<script>` tag. The parsing of the document halts until the script has been executed. If the script is external then the resource must first be fetched from the network-this is also done synchronously, and parsing halts until the resource is fetched. This was the model for many years and is also specified in HTML4 and 5 specifications. Authors can add the "defer" attribute to a script, in which case it will not halt document parsing and will execute after the document is parsed. HTML5 adds an option to mark the script as asynchronous so it will be parsed and executed by a different thread.
 
+<br/>
+
+
 ## 6-2. Speculative parsing
 Both WebKit and Firefox do this optimization. While executing scripts, another thread parses the rest of the document and finds out what other resources need to be loaded from the network and loads them. In this way, resources can be loaded on parallel connections and overall speed is improved. *Note: the speculative parser only parses references to external resources like external scripts, style sheets and images: it doesn't modify the DOM tree-that is left to the main parser.*
+
+
+<br/>
 
 ## 6-3. Style sheets
 Style sheets on the other hand have a different model. Conceptually it seems that since style sheets don't change the DOM tree, there is no reason to wait for them and stop the document parsing. There is an issue, though, of scripts asking for style information during the document parsing stage. If the style is not loaded and parsed yet, the script will get wrong answers and apparently this caused lots of problems. It seems to be an edge case but is quite common. Firefox blocks all scripts when there is a style sheet that is still being loaded and parsed. WebKit blocks scripts only when they try to access certain style properties that may be affected by unloaded style sheets.
@@ -569,6 +677,12 @@ RenderObject* RenderObject::createObject(Node* node, RenderStyle*style){
 The element type is also considered: for example, form controls and tables have special frames. 
 InWebKit if an element wants to create a special renderer, it will override the `createRenderer()` method. The renderers point to style objects that contains non-geometric information.
 
+<br/>
+
+
+<br/>
+
+
 ## 7-1. The render tree relation to the DOM tree
 The renderers correspond to DOm elements, but the relation is not one to one. Non-visual DOm elements will not be inserted in the render tree. An example is the "head" element. Also elements whose display value was assigned to "none" will not appear in the tree (whereas elements with "hidden" visibility will appear in the tree).
 
@@ -580,6 +694,9 @@ Sone render objects correspond to a DOM node but not in the same place in the tr
 
 ![therendertree](/uploads/therendertree.png) *Figure: The render tree and the corresponding DOM tree (3.1). The "Viewport" is the initial containing block. In WebKit it will be the "RenderView" object.*
 
+<br/>
+
+
 ## 7-2. The flow of constructing the ree
 In Firefox, the presentation is registered as a listener for DOM updates. The presentation delegates frame creation to the `FrameConstructor` and the constructor resolves style (see style computation) and creates a frame.
 
@@ -588,6 +705,9 @@ InWebKit the process of resolving the style and creating a renderer is called "a
 Processing the html and body tags results in the construction of the render tree root. The root render object corresponds to what the CSS spec calls the containing block: the top most block that contains all other blocks. Its dimensions are the viewport: the calls it `RenderView`. This is the render objects that the document points to. The rest of the tree is constructed as a DOM nodes insertion.
 
 See the CSS2 spec on the processing model.
+
+<br/>
+
 
 ## 7-3. Style Computation
 Building the render tree requires calculating the visual properties of each render object. 
@@ -612,6 +732,9 @@ div div div div {
 
 
 Let's see how the browsers face these issues:
+
+<br/>
+
 
 ## 7-4. Sharing style data
 WebKit nodes references style objects (RenderStyle). These objects can be shared by nodes in some conditions. The nodes are siblings of cousins and:
@@ -722,6 +845,9 @@ In WebKit, who does not have a rule tree, the matched declarations are traversed
 So to summarize: sharing the style objects (entirely or some of the structs inside them) solves issues 1 and 3. The Firefox rule tree also helps in applying the properties in the correct order.
 
 
+<br/>
+
+
 ## 8. Manipulating the rules for an easy match
 There are several sources for style rules:
 * CSS rules, either in external style sheets or in style elements.
@@ -778,11 +904,17 @@ it will still be extracted from the tag map, because the key is the rightmost se
 
 Both WebKit Firefox do this manipulation.
 
+<br/>
+
+
 
 ## 8-1. Applying the rules in the correct cascade order
 The style object has properties corresponding to every visual attribute (all CSS attributes but more generic). If the property is not defined by any of the matched rules, then some properties can be inherited by the parent element style object. Other properties have default values.
 
 The problem begins when there is more than one definition- here cones the cascade order to solve the issue.
+
+
+<br/>
 
 ## 8-2. Style sheet cascade order
 
@@ -795,6 +927,9 @@ A declaration for a style property can appear in several style sheets, and sever
     5. User important declarations
 
 The browser declarations are lease important and the user overrides the author only if the declaration marked as important. Declarations with the same order will be sorted by specificity. and then the order they are specified. The HTML visual attributes are translated to matching CSS declarations. They are treated as author rules with low priority.
+
+
+<br/>
 
 ## 8-3. Specificity
 
@@ -825,6 +960,9 @@ li.red.level{} /* a=0 b=0 c=2 d=1 -> specificity = 0,0,2,1 */
 style="" /* a=1 b=0 c=0 d=0 -> specificity = 1,0,0,0 */  
 ~~~
 
+<br/>
+
+
 ## 8-4. Sorting the rules
 
 After the rules are matched, they are sorted according to the cascade rules. WebKit uses bubble sort for small lists and merge sort fot big ones. WebKit implements sorting by overriding the ">" operator for the rules:
@@ -836,6 +974,9 @@ static bool operator >(CSSRuleData& r1, CSSRuleData& r2){
     return (spec1 == spec2) : r1.position() > r2.position() : spec1 > spec2;
 } 
 ~~~
+
+<br/>
+
 
 ## 8-5. Gradual process
 
@@ -856,10 +997,16 @@ The position of the root renderer is 0,0 and its dimensions are the viewport-the
 
 All renderers have a "layout" or "reflow" method, each renderer invokes the layout method of its children that need layout.
 
+
+<br/>
+
 ## 9-1. Dirty bit system
 In order not to do a full layout for every small change, browsers use a "dirty bit" system. A renderer that is changed or added marks itself and its children as "dirty": needing layout.
 
 There are two flags: "dirty", and "children are dirty" which means that although the renderer itself may be OK, it has at least one child that needs a layout.
+
+<br/>
+
 
 
 ## 9-2. Global and incremental layout
@@ -875,16 +1022,25 @@ Incremental layout is triggered (asynchronously) when renderers are dirty. for e
 
 ![incrementallayout](/uploads/incrementallayout.png) *Figure: Incremental layout-only dirty renderers and their children are laid out (3.6.)*
 
+<br/>
+
+
 ## 9-3. Asynchronous and Synchronous layout
 
 Incremental layout is done asynchronously. Firefox queues "reflow commands" for incremental layouts and a scheduler triggers batch execution of these commands. WebKit also has a timer that executes an incremental layout -the tree is traversed and "dirty" renderers are layout out.
 Scripts asking for style information, like "offsetHeight" can trigger incremental layout synchronously.
+
+
+<br/>
 
 ## 9-4. Optimizations
 
 When a layout is triggered by a "resize" or a change in the renderer position (and not size), the renders sizes are taken from a cache and not recalculated..
 
 In some cases only a sub tree is modified and layout does not start from the root. This can happen is cases where the change is local and does not affect its surroundings-like text inserted into text fields (otherwise every keystroke would trigger a layout starting from the root).
+
+<br/>
+
 
 ## 9-5. The layout process
 
@@ -899,6 +1055,9 @@ The layout usually has the following pattern:
 
 Firefox uses a "state" object (nsHTMLReflowState) as a parameter to layout (termed "reflow"). Among others the state includes the parent width.
 The output of the Firefox layout is a "metrics" object (nsHTMLReflowMetrics). It will contain the renderer computed height.
+
+<br/>
+
 
 ## 9-6. Width calculation
 
@@ -927,17 +1086,29 @@ If the preferred width is greater then the maximum width, the maximum width is u
 
 The values are cached in case a layout is needed, but the width does not change.
 
+<br/>
+
+
 ## 9-7. Line Breaking
 
 When a renderer in the middle of a layout decides that is needs to break, the renderer stops and propagates to the layout's parent that it needs to be broken. The parent creates the extra renderers and calls layout on them.
+
+
+<br/>
 
 # 10. Painting
 
 In the painting stage, the render tree is traversed and the renderer's "paint()" method is called to display content on the screen. Painting uses the UI infrastructure component.
 
+<br/>
+
+
 ## 10-1. Global and Incremental
 
 Like layout, painting can also be global-the entire tree is painted-or incremental. In incremental painting, some of the renderers change in a way that does not affect the entire tree. The changed renderer invalidates its rectangle on the screen. This causes the OS to see it as a "dirty region" and generate a "paint" event. The OS does it cleverly and coalesces several regions into one. in Chrome it is more complicated because the renderer is in a different process then the main process. Chrome simulates the OS behavior to some extent. The presentation listens to these events and delegates the message to the render root. The tree is traversed until the relevant renderer is reached. It will repaint itself (and usually its children).
+
+<br/>
+
 
 ## 10-2. The painting order
 
@@ -949,24 +1120,39 @@ CSS2 defined the order of the painting process. This is actually the order in wh
 4. children
 5. outline
 
+<br/>
+
+
 ## 10-3. Firefox display list
 
 Firefox goes over the render tree and builds a display list for the painted rectangular. it contains the renderers relevant for the rectangular, in the right painting order (backgrounds of the renderers, then borders etc.). That way the tree needs to be traversed only once for a repaint instead of several times- painting all backgrounds, then all images, then all borders etc.
 
 Firefox optimizes the process by not adding elements that will be hidden, like elements completely beneath other opaque elements.
 
+
+<br/>
+
 ## 10-4. WebKit rectangle storage
 
 Before repainting, WebKit saves the old rectangle as a bitmap. It then paints only the delta between the new and old rectangles.
+
+<br/>
+
 
 ## 10-5. Dynamic changes
 
 The browsers try to do the minimal possible actions in response to a change. So changes to an element's color will cause only repaint of the element. Changes to the element position will cause layout and repaint of the element, its children and possibly siblings. Adding a DOM node will cause layout and repaint of the node. Major changes, like increasing font size of the "html" element. will cause invalidation of caches, relayout and repaint of the entire tree.
 
+
+<br/>
+
 ## 10-6. The rendering engine's threads
 
 The rendering engine is single threaded. Almost everything, except network operations, happens in a single thread. In Firefox and Safari this the main thread of the browser. In Chrome it's the tab process main thread.
 Network operations can be performed by several parallel threads. The number of parallel connections is limited. (usually 2-6 connections)
+
+<br/>
+
 
 ## 10-7. Event loop
 
@@ -986,6 +1172,9 @@ while (@mExiting)
 According to the CSS2 specification, the term canvas describes "the space where the formatting structure is rendered": where the browser paints the content. The canvas is infinite for each dimensions of the space but browsers choose an initial width based on the dimensions of the viewport.
 
 According the [https://www.w3.org/TR/CSS2/zindex.html](https://www.w3.org/TR/CSS2/zindex.html), the canvas is transparent if contained within another, and given a browser defined color it it is not.
+
+<br/>
+
 
 ## 11-2. CSS Box model
 
@@ -1008,6 +1197,9 @@ The default is inline but the browser style sheet may set other defaults. For ex
 you can find a default style sheet example here:
 [www.w3.org/TR/CSS2/sample.html](www.w3.org/TR/CSS2/sample.html)
 
+<br/>
+
+
 ## 11-3. Positioning scheme
 
 There are three schemes:
@@ -1029,6 +1221,9 @@ The way the box is laid out is determined by:
 * positioning scheme
 * External information such as image size and the size of the screen
 
+<br/>
+
+
 ## 11-4. Box types 
 
 Block box: forms a block-has its own rectangle in the browser window.
@@ -1048,6 +1243,9 @@ This is usually what happens in a paragraph.
 
 
 ![lines](/uploads/lines.png) *Figure: Lines*
+
+<br/>
+
 
 ## 11-5. Positioning
 ### 11-5-1. Relative
@@ -1071,13 +1269,16 @@ Will look like:
 
 ![float](/uploads/float.png) *Figure: Float*
 
-### Absolute and fixed
+### 11-5-3. Absolute and fixed
 
 The layout is defined exactly regardless of the normal flow. The element does not participate in the normal flow. The dimentions are relative to the container. In fixed, the container is the viewport.
 
 ![fixedpositioning](/uploads/fixedpositioning.png) *Figure: Fixed positioning*
 
 *Note: the fixed box will not move even when the document is scrolled!*
+
+<br/>
+
 
 ## 11-6. Layered representation
 
