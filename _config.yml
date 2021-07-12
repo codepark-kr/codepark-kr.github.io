@@ -19,7 +19,7 @@ style: dark
 plugins:
   - jekyll-seo-tag
 
-footer: 'copyright ©codepark.kr@gmail.com'
+footer: 'codepark.kr@gmail.com'
 
 # Build settings
 markdown: kramdown
