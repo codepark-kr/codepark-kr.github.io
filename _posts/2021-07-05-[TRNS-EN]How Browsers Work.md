@@ -1037,3 +1037,78 @@ Block box: forms a block-has its own rectangle in the browser window.
 
 Inline box: does not have its own block, but is inside a containing block.
 
+![inlineboxes](/uploads/inlineboxes.png) *Figure: Inline boxes*
+
+Blocks are formatted vertically one after the other. Inline are formatted horizontally.
+
+![blockand](/uploads/blockand.png) *Figure: Block and Inline formatting*
+
+Inline boxes are put inside lines or "line boxes". The lines are at least as tall as the tallest box but can be taller, when the boxes are aligned "baseline" -meaning the bottom part of an element is aligned at a point of another box other then the bottom. If the container width is not enough, the inlines will be put on several lines. 
+This is usually what happens in a paragraph.
+
+
+![lines](/uploads/lines.png) *Figure: Lines*
+
+## 11-5. Positioning
+### 11-5-1. Relative
+Relative positioning-positioned like usual and then moved by the required delta.
+
+![relativepositioning](/uploads/relativepositioning.png) *Figure: Relative positioning*
+
+### 11-5-2. Floats
+
+A float box is shifted to the left or right of a line. The interesting feature is that the other boxes flow around it. The HTML:
+
+~~~html
+<p>
+    <img style="float: right" src="images/image.gif" width="100" height="100">
+    Lorem
+
+</p>
+~~~
+
+Will look like:
+
+![float](/uploads/float.png) *Figure: Float*
+
+### Absolute and fixed
+
+The layout is defined exactly regardless of the normal flow. The element does not participate in the normal flow. The dimentions are relative to the container. In fixed, the container is the viewport.
+
+![fixedpositioning](/uploads/fixedpositioning.png) *Figure: Fixed positioning*
+
+*Note: the fixed box will not move even when the document is scrolled!*
+
+## 11-6. Layered representation
+
+This is specified by the z-index CSS property. It represents the third dimension of the box: its position along the "z axis".
+
+The boxes are divided into stacks (called stacking contexts). Ineach stack the back elements will be painted first and the forward elements on top, closer to the user. In case of overlap the foremost element will hide the former element.
+the stacks are ordered accodring to the z-index property. Boxes with "z-index" property form a local stack. The viewport has the outer stack.
+
+Example:
+~~~html
+<style type="text/css">
+      div {
+        position: absolute;
+        left: 2in;
+        top: 2in;
+      }
+</style>
+
+<p>
+    <div
+         style="z-index: 3;background-color:red; width: 1in; height: 1in; ">
+    </div>
+    <div
+         style="z-index: 1;background-color:green;width: 2in; height: 2in;">
+    </div>
+ </p>
+~~~
+
+The result will be this: 
+
+![fixedpositioning2](/uploads/fixed.png) *Figure: Fixed positioning*
+
+Although the red div precedes the green one in the markup, and would have been painted before in the regular flow, the z-index property is higher, so it is more forward in the stack held by the root box.
+
