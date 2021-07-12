@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "[TRSCR.] How browsers Work: Behind the scenes of modern web browsers (last update: 07.08.2021.)"
+title:  "[TRNS-EN] How browsers Work: Behind the scenes of modern web browsers (last update: 07.12.2021.)"
 date:   2021-07-05 10:55:00 +0900
 categories:
 ---
 
-## [TRSCR.] How browsers Work: Behind the scenes of modern web browsers (last update: 07.08.2021.)
+## [TRNS-EN] How browsers Work: Behind the scenes of modern web browsers (last update: 07.12.2021.)
 `05.07.2021`
 @yb park 
 
