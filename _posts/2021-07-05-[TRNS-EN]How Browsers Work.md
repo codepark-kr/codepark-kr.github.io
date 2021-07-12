@@ -836,3 +836,204 @@ static bool operator >(CSSRuleData& r1, CSSRuleData& r2){
     return (spec1 == spec2) : r1.position() > r2.position() : spec1 > spec2;
 } 
 ~~~
+
+## 8-5. Gradual process
+
+WebKit uses a flag that marks if all top level style sheets (including @imports) have been loaded. If the style is not fully loaded when attaching, place holders are used and it is marked in the document, and they will be recalculated once the style sheets were loaded.
+
+<br/>
+
+# 9. Layout
+When the renderer is created and added to the tree, it does not have a position and size. Calculating these values is called layout or reflow.
+
+HTMl uses a flow based layout model, meaning that most of the time it is possible to compute the geometry in a single pass. Elements later "in the flow" typically do not affect the geometry in a single pass. Elements later "in the flow" typically do not affect the geometry of elements that are earlier "in the flow", so layout can proceed let-to-right, top-to-bottom through the document. There are exceptions: for example, HTML tables may require more than one pass (3.5).
+
+The coordinate system is relative to the root frame. Top and left coordinates are used.
+
+Layout is a recursive process. It begins at the root renderer, which corresponds to the `<html>` element of the HTML document. Layout continues recursively through some or all of the frame hierarchy, computing geometric information for each renderer that requires it.
+
+The position of the root renderer is 0,0 and its dimensions are the viewport-the visible part of the browser window.
+
+All renderers have a "layout" or "reflow" method, each renderer invokes the layout method of its children that need layout.
+
+## 9-1. Dirty bit system
+In order not to do a full layout for every small change, browsers use a "dirty bit" system. A renderer that is changed or added marks itself and its children as "dirty": needing layout.
+
+There are two flags: "dirty", and "children are dirty" which means that although the renderer itself may be OK, it has at least one child that needs a layout.
+
+
+## 9-2. Global and incremental layout
+
+Layout can be triggered on the entire render tree-this is "global" layout. This can happen as a result of:
+
+1. A global style change that effects all renderers, like a font size change.
+2. As a result of a screen being resized
+
+Layout can be incremental, only the dirty renderers will be laid out (this can cause some damage which will require extra layouts). 
+Incremental layout is triggered (asynchronously) when renderers are dirty. for example when new renderers are appended to the render tree after extra content came from the network and was added to the DOM tree.
+
+
+![incrementallayout](/uploads/incrementallayout.png) *Figure: Incremental layout-only dirty renderers and their children are laid out (3.6.)*
+
+## 9-3. Asynchronous and Synchronous layout
+
+Incremental layout is done asynchronously. Firefox queues "reflow commands" for incremental layouts and a scheduler triggers batch execution of these commands. WebKit also has a timer that executes an incremental layout -the tree is traversed and "dirty" renderers are layout out.
+Scripts asking for style information, like "offsetHeight" can trigger incremental layout synchronously.
+
+## 9-4. Optimizations
+
+When a layout is triggered by a "resize" or a change in the renderer position (and not size), the renders sizes are taken from a cache and not recalculated..
+
+In some cases only a sub tree is modified and layout does not start from the root. This can happen is cases where the change is local and does not affect its surroundings-like text inserted into text fields (otherwise every keystroke would trigger a layout starting from the root).
+
+## 9-5. The layout process
+
+The layout usually has the following pattern:
+
+1. Parent renderer determines its own width
+2. Parent goes over children and:
+   1. Place the child renderer (sets its X and Y)
+   2. Calls child layout if needed-they are dirty or we are in a global layout, or for some other reason-which calculates the child's height
+3. Parent uses children's accumulative heights and the heights of margins and padding to set its own height-this will be used by parent renderer's parent.
+4. Sets its dirty bit to false
+
+Firefox uses a "state" object (nsHTMLReflowState) as a parameter to layout (termed "reflow"). Among others the state includes the parent width.
+The output of the Firefox layout is a "metrics" object (nsHTMLReflowMetrics). It will contain the renderer computed height.
+
+## 9-6. Width calculation
+
+The renderer's width is calculated using the container block's width, the renderer's style "width" property. the margins and borders.
+For example the width of the following div:
+~~~html
+<div style="width: 30%">
+</div>
+~~~
+
+Would be calculated by WebKit as the following (class RenderBox method calcWidth)
+
+* The container width is the maximum of the containers availableWidth and 0.
+* The availableWidth in this case is the contentWidth which is calculated as:
+
+~~~js
+clientWidth() - paddingLeft() - paddingRight()
+~~~
+
+clientWidth and clientHeight represent the interior of an object excluding border and scrollbar.
+* The elements width is the "width" style attribute. It will be calculated as an absolute value by computing the percentage of the container width.
+* The horizontal borders and paddings are now added.
+
+So far this was the calculation of the "preferred width". Now the minimum and maximum widths will be calculated.
+If the preferred width is greater then the maximum width, the maximum width is used. If it is less then the minimum width (the smallest unbreakable unit) then the minimum width is used.
+
+The values are cached in case a layout is needed, but the width does not change.
+
+## 9-7. Line Breaking
+
+When a renderer in the middle of a layout decides that is needs to break, the renderer stops and propagates to the layout's parent that it needs to be broken. The parent creates the extra renderers and calls layout on them.
+
+# 10. Painting
+
+In the painting stage, the render tree is traversed and the renderer's "paint()" method is called to display content on the screen. Painting uses the UI infrastructure component.
+
+## 10-1. Global and Incremental
+
+Like layout, painting can also be global-the entire tree is painted-or incremental. In incremental painting, some of the renderers change in a way that does not affect the entire tree. The changed renderer invalidates its rectangle on the screen. This causes the OS to see it as a "dirty region" and generate a "paint" event. The OS does it cleverly and coalesces several regions into one. in Chrome it is more complicated because the renderer is in a different process then the main process. Chrome simulates the OS behavior to some extent. The presentation listens to these events and delegates the message to the render root. The tree is traversed until the relevant renderer is reached. It will repaint itself (and usually its children).
+
+## 10-2. The painting order
+
+CSS2 defined the order of the painting process. This is actually the order in which the elements are stacked in the stacking contexts. This order affects painting since the stacks are painted from back to front. The stacking order of a block renderer is:
+
+1. background color
+2. background image
+3. border
+4. children
+5. outline
+
+## 10-3. Firefox display list
+
+Firefox goes over the render tree and builds a display list for the painted rectangular. it contains the renderers relevant for the rectangular, in the right painting order (backgrounds of the renderers, then borders etc.). That way the tree needs to be traversed only once for a repaint instead of several times- painting all backgrounds, then all images, then all borders etc.
+
+Firefox optimizes the process by not adding elements that will be hidden, like elements completely beneath other opaque elements.
+
+## 10-4. WebKit rectangle storage
+
+Before repainting, WebKit saves the old rectangle as a bitmap. It then paints only the delta between the new and old rectangles.
+
+## 10-5. Dynamic changes
+
+The browsers try to do the minimal possible actions in response to a change. So changes to an element's color will cause only repaint of the element. Changes to the element position will cause layout and repaint of the element, its children and possibly siblings. Adding a DOM node will cause layout and repaint of the node. Major changes, like increasing font size of the "html" element. will cause invalidation of caches, relayout and repaint of the entire tree.
+
+## 10-6. The rendering engine's threads
+
+The rendering engine is single threaded. Almost everything, except network operations, happens in a single thread. In Firefox and Safari this the main thread of the browser. In Chrome it's the tab process main thread.
+Network operations can be performed by several parallel threads. The number of parallel connections is limited. (usually 2-6 connections)
+
+## 10-7. Event loop
+
+The browser main thread is an event loop. it's an infinite loop that keeps the process alive. it waits for events (like layout and paint event) and processes them. This is Firefox code for the main event loop:
+
+~~~java
+while (@mExiting)
+    NS_ProcessnextEvent(thread);
+~~~
+
+<br/>
+
+# 11. CSS2 visual model
+
+## 11-1. The canvas
+
+According to the CSS2 specification, the term canvas describes "the space where the formatting structure is rendered": where the browser paints the content. The canvas is infinite for each dimensions of the space but browsers choose an initial width based on the dimensions of the viewport.
+
+According the [https://www.w3.org/TR/CSS2/zindex.html](https://www.w3.org/TR/CSS2/zindex.html), the canvas is transparent if contained within another, and given a browser defined color it it is not.
+
+## 11-2. CSS Box model
+
+The Css box model describes the rectangular boxes that are generated for elements in the document tree and laid out according to the visual formatting model.
+Each box has a content area (e.g. text, an image, etc.) and optional surrounding padding, border, and margin areas.
+
+![boxmodel](/uploads/boxmodel.jpg) *Figure: CSS2 box model*
+
+Each node generates 0..n such boxes.
+All elements have a "display" property that determines the type of box that will be generated.
+Examples:
+
+~~~
+block: generates a block box.
+inline: generates one or more inline boxes.
+none: no box is generated.
+~~~
+
+The default is inline but the browser style sheet may set other defaults. For example: the default display for the "div" element is block.
+you can find a default style sheet example here:
+[www.w3.org/TR/CSS2/sample.html](www.w3.org/TR/CSS2/sample.html)
+
+## 11-3. Positioning scheme
+
+There are three schemes:
+
+1. Normal: the object is positioned according to its place in the document. This means its place in the render tree is like its place in the DOM tree and laid out according to its box type and dimensions
+2. Float: the object is first laid out like normal flow, then moved as far left or right as possible
+3. Absolute: the object is put in the render tree in a different place than in the DOM tree
+
+The positioning scheme is set by the "position" property and the "float" attribute.
+* static and relative case a normal flow
+* absolute and fixed cause absolute positioning
+
+In static positioning no position is defined and the default positioning is used. In the other schemes, the author specifies the position: top, bottom, left, right.
+
+The way the box is laid out is determined by:
+
+* Box type
+* Box dimensions
+* positioning scheme
+* External information such as image size and the size of the screen
+
+## 11-4. Box types 
+
+Block box: forms a block-has its own rectangle in the browser window.
+
+![blockbox](/uploads/blockbox.png) *Figure: Block box*
+
+Inline box: does not have its own block, but is inside a containing block.
+
