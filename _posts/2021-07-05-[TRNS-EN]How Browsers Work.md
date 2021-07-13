@@ -164,7 +164,7 @@ parser-general에서 상기한 것처럼, 프로그래밍 문법은 BNF와 같�
 HTML 정의는 DTD(Document Type Definition) 형식입니다. 이 형식은 SGML(Standard Generalized Markup Language) 계열의 언어들을 정의하는데에 사용됩니다. 참고로 SGML이란 다른 markup 언어를 기술하기 위한 markup 언어입니다. 이 형식은 모든 허용되는 요소들, 그들의 속성들 그리고 계층에 대한 정의를 포함하고 있습니다. DTD에는 몇 가지 변종들이 있습니다. 엄격한 형식은 명세만을 따르지만 또 다른 모드에서는 과거의 브라우저들에 의해 사용된 markup을 위한 지원도 포함하고 있습니다. 
 
 ## 4-3. DOM
-결과물 트리 (the "parse tree")는 DOM 요소들과 속성 노드들의 tree입니다. DOM은 Document Object Model(문서 객체 모델)의 준말로, HTML 문서와 HTML 인터메이스 요소들을 JavaScript와 같이 외부 세계로 표출하는 객체입니다. tree의 최상위 객체는 "Document" 입니다. 
+결과물 트리 (the "parse tree")는 DOM 요소들과 속성 노드들의 tree입니다. DOM은 Document Object Model(문서 객체 모델)의 준말로, HTML 문서와 HTML 인터페이스 요소들을 JavaScript와 같이 외부 세계로 표출하는 객체입니다. tree의 최상위 객체는 "Document" 입니다. 
 
 DOM은 markup과 1:1의 관계를 맺습니다. 예를 들어:
 
@@ -188,12 +188,12 @@ DOM은 markup과 1:1의 관계를 맺습니다. 예를 들어:
 트리가 DOM node를 생성한다고 말 한 것은, DOM 인터페이스들 중 하나를 상속하는 요소들이 tree를 구축하고 있다는 의미입니다. 브라우저는 브라우저 내부적으로 다른 속성들을 구체적인 구현체로 사용합니다.
 
 ## 4-4. The parsing algorithm
-이 전의 섹션에서 상기한 바와 같이, HTMl은 일반작인 상향식 또는 하향식 파서로는 parsing 될 수 없습니다.
+이 전의 섹션에서 상기한 바와 같이, HTML은 일반적인 상향식 또는 하향식 파서로는 parsing 될 수 없습니다.
 그 이유는 다음과 같습니다:
 
 1. 언어의 너그러운 속성
 2. 브라우저들이 가진 유효하지 않은 HTML에 대한 관습적인 에러 허용
-3. **파싱 과정이 재입가능하기 때문에.** 다른 언어들의 소스는 파싱 과정에서 변화하지 않으나, **HTML의 동적인 코드**(`document.write()`를 포함하고 있는 script element(요소) 등)**는 토큰들을 추가할 수 있고 파싱 프로세스는 실제로 input을 수정하게 된다.**
+3. **파싱 과정이 재입가능(reentrant)하기 때문에.** 다른 언어들의 소스는 파싱 과정에서 변화하지 않으나, **HTML의 동적인 코드**(`document.write()`를 포함하고 있는 script element(요소) 등)**는 토큰들을 추가할 수 있고 파싱 프로세스는 실제로 input을 수정하게 된다.**
 
 기존의 parsing 기술들이 사용 불가하기 때문에, 브라우저는 HTML을 파싱하기 위해 custom parsers를 생성합니다.
 [파싱 알고리즘은 HTML5 명세 중 세부사항에 기술되어 있습니다.](https://html.spec.whatwg.org/multipage/parsing.html). 
@@ -230,7 +230,7 @@ DOM은 markup과 1:1의 관계를 맺습니다. 예를 들어:
 
 ## 4-6. Tree construction algorithm
 
-parser가 생성되면 Document 객체가 생성됩니다. tree가 구축되는 동안 문서 최상단에서는 DOM 트리가 수정되고, 요소가 추가됩니다. 토큰화에 의해 발행된 각 노드는 트리 생성자에 의해 처리됩니다. 각 토근에 대한 specification(명세)는 이와 관련된 DOM 요소에 정의되어 있고, 이는 토큰에 의해 생성됩니다. DOM 트리에 요소를 추가하는 것이 아니라면 열린 요소는 stack(임시 버퍼 저장소)에 추가됩니다. 이 stack은 부정확한 중첩 및, 종료되지 않은 태그들을 교정합니다. 이 알고리즘 역시 일종의 state machine(상태 기계)로 기술됩니다. 이 상태는 "Insertion modes(삽입 모드)"로 불립니다.
+parser가 생성되면 Document 객체가 생성됩니다. tree가 구축되는 동안 문서 최상단에서는 DOM 트리가 수정되고, 요소가 추가됩니다. 토큰화에 의해 발행된 각 노드는 트리 생성자에 의해 처리됩니다. 각 토큰에 대한 specification(명세)는 이와 관련된 DOM 요소에 정의되어 있고, 이는 토큰에 의해 생성됩니다. DOM 트리에 요소를 추가하는 것이 아니라면 열린 요소는 stack(임시 버퍼 저장소)에 추가됩니다. 이 stack은 부정확한 중첩 및, 종료되지 않은 태그들을 교정합니다. 이 알고리즘 역시 일종의 state machine(상태 기계)로 기술됩니다. 이 상태는 "Insertion modes(삽입 모드)"로 불립니다.
 
 예시의 input을 위한 트리 구축 프로세스는 이러합니다:
 
@@ -258,11 +258,13 @@ body 종료 토큰을 받으면 **"after body -즉 body 이후-"** 모드가 됩
 이 단계에서 브라우저는 문서와 상호작용할 수 있게 되고, 문서 파싱 이후에 실행되어야 하는 **"deferred mode 지연 모드"** 내의 스크립트를 파싱하기 시작합니다. 문서의 상태는 "complete 완료"가 되고, "load" 이벤트가 발생됩니다. 보다 자세한 내용은 [HTML5의 토큰화 알고리즘과 트리 구축](https://html.spec.whatwg.org/multipage/parsing.html#html-parser)에서 확인이 가능합니다.
 
 
+<br/>
+
 # 5. CSS parsing
 상기했듯, CSS는 문맥 자유 문법(Context free Grammar)이기 때문에 HTML과는 다르게 기존의 parser로 파싱이 가능합니다.
 
 ## 5-1. WebKit CSS Parser
-브라우저별로 상이한 렌더링 엔진을 차용하고 있다고 설명했습니다. 크롬/사파리는 WebKit, 파이어폭스는 Gecko라는 렌더링 엔진을 사용하고 있다고 설명한 바 있는데, 이 중 WebKit CSS parser에 대해서 먼저 설명하겠습니다.
+브라우저별로 상이한 렌더링 엔진을 차용하고 있다고 설명했습니다. 크롬/사파리는 WebKit, 파이어폭스는 Gecko라는 렌더링 엔진을 사용하고 있는데, 이 중 WebKit CSS parser에 대해서 먼저 설명하겠습니다.
 
 WebKit은 CSS 문법 파일로부터 자동으로 파서를 생성하기 위해 Flex(= Lexer = Tokenizer), GNU Bison parser generator를 사용합니다. 이 중 Bison은 상향식 이동 감소 파서를 생성하며, 파이어폭스는 직접 작성한 하향식 파서를 사용합니다. 두 경우 모두, 각 CSS 파일은 스타일 시트 객체로 파싱되고 각 객체는 CSS 규칙을 포함하고 있습니다. CSS 규칙 객체(CSS rules object)는 선택자와 선언 객체, 그리고 CSS 문법과 일치하는 다른 객체를 포함합니다. 
 이 CSS 파싱 구조는 다음과 같습니다:
@@ -281,14 +283,50 @@ WebKit은 CSS 문법 파일로부터 자동으로 파서를 생성하기 위해 
 <br/>
 
 # 7. Render tree construction
-DOM tree가 구축되면, 브라우저는 또 다른 트리, render tree를 구축합니다. 이 트리는 표시해야 할 순서와 문서의 시각적인 구성 요소로써 올바른 순서로 내용을 그려낼 수 있게 하기 위함입니다. Gecko는 이 render tree를 "frame(형상)"이라 명칭하고,  WebKit은 renderer(렌더러), 또는 render object(렌더 객체)라 칭하고 있습니다.
+**DOM tree가 구축되면, 브라우저는 또 다른 트리, render tree를 구축합니다. 이 render tree는 표시해야 할 순서와 문서의 시각적인 구성 요소로써 올바른 순서로 내용을 그려낼 수 있게 하기 위함입니다.** Gecko는 이 render tree를 "frame(형상)"이라 명칭하고, WebKit은 renderer(렌더러), 또는 render object(렌더 객체)라 칭하고 있습니다.
 
 ## 7-1. The render tree relation to the DOM tree
-renderer는 DOM element에 부합하지만 1:1로 대응하는 관계는 아닙니다. 예를 들어, "head" 요소와 같은 비시각적 DOM 요소는 render tree에 추가되지 않습니다. 또한, display 속성에 "none" 값이 할당된 요소는 트리에 나타나지 않습니다. 단, visibility 요소에 hidden 값이 할당된 요스는 트리에 나타납니다. 간단하게, 시각적으로 표출되는 요소의 경우 render tree에 추가되는 것입니다. 
+renderer는 DOM element에 부합하지만 1:1로 대응하는 관계는 아닙니다. 예를 들어, "head" 요소와 같은 비시각적 DOM 요소는 render tree에 추가되지 않습니다. 또한, display 속성에 "none" 값이 할당된 요소는 트리에 나타나지 않습니다. 단, visibility 요소에 hidden 값이 할당된 요스는 트리에 나타납니다. **간단하게, 시각적으로 표출되는 요소의 경우 render tree에 추가되는 것입니다.**
 
 이와 반면에, 여러 개의 시각적인 객체와 대응하는 DOM 요소도 있는데, 예를 들면 select(표시 영역, 드롭다운 목록, 버튼 표시를 위한 3개의 renderer), 또한 하나의 라인에 충분히 표시할 수 없는 문자가 여러 라인으로 변경될 때 - 새로운 라인이 별도의 renderer로 추가됩니다. 여러 개의 renderer와 대응하는 또 다른 예는 broken HTML(깨진 HTML)입니다. CSS specification에 의하면, inline 박스는 block 박스만 포함하거나, inline 박스만을 포함해야 하는데, inline box와 block box가 혼재되어 있는 경우 이 inline box를 감싸기 위한 익명의 block renderer를 생성합니다.
 
 ![therendertree](/uploads/therendertree.png) *Figure: render tree와 DOM tree의 대응 (3.1). The "Viewport"는 최초의 containing block입니다. 이는 WebKit에서는 "RenderView" 객체가 이 역할을 수행합니다.*
 
 ## 7-2. The flow of constructing tree
-WebKit에서는 스타일을 결정하고 renderer tree root를 구
+파이어폭스에서는 DOM 업데이트를 위한 listener로 Presentation을 등록합니다. 이 Presentation은 형상 만들기를 FrameConstructor에 위임하고, FrameConstructor는 스타일을 결정하고 형상을 만듭니다.
+
+WebKit(크롬/사파리)에서는 스타일을 결정하고 renderer를 생성하는 과정을 Attachment라고 부릅니다. 모든 DOM node에는 "attach" method가 존재합니다. 이 Attachment는 동기적인데, DOM tree에 node를 추가하면 새로운 node의 attach method를 호출합니다.
+
+html 태그와 body 태그를 처리함으로써 render tree root를 구성하게 됩니다. 여기서의 **root render object란 containing block, 즉 모든 다른 block을 포함하는 최상위 block에 해당합니다. 파이어폭스는 이 것을 ViewPortFrame이라 부르고, WebKit은 RenderView라고 명칭합니다. 이 것이 바로 Document가 가리키는 render object입니다.** tree의 나머지 부분은 DOM node를 추가함으로써 구축됩니다.
+
+## 7-3. Style Computation
+render tree를 구축하려면 각 render object의 시각적인 속성에 대한 계산이 필요한데, 이 것은 각 요소의 스타일 속성을 계산함으로써 처리됩니다.
+여기서의 스타일은, 인라인 스타일 요소와(태그 내에 style 속성을 명시하는 방식) HTML의 시각적 속성(e.g. bgcolor, border-collapse)와 같은 다양한 형태의 스타일 시트를 포함하는데, HTMl의 시각적 속성들은 이에 대응하는 CSS 스타일 속성으로 변환됩니다.
+
+단, 스타일을 계산하는 일에는 다음과 같은 몇 가지 어려움이 따릅니다.
+
+1. 스타일 데이터는 구성이 매우 광범위하고, 수많은 스타일 속성들을 수용하면서 메모리 문제를 야기할 수 있습니다.
+2. 최적화되어있지 않다면, 각 요소에 할당된 규칙을 찾는 것은 성능 문제를 야기할 수 있습니다. (e.g. depth가 깊은 복합 선택자)
+3. 규칙을 적용하는 것은 계층 구조를 파악해야 하는, 복잡한 다단계의 규칙을 수반합니다.
+
+## 7-4. Sharing style data
+WebKit node는 RenderStyle, 즉 스타일 객체를 참조하는데 이 객체는 일정 조건 아래 공유할 수 있습니다.
+node가 형제이거나 사촌일 때 스타일을 공유하고, 다음과 같은 조건이 일치할 때 공유가 가능합니다.
+
+1. 동일한 마우스 반응 상태를 가진 요소일 때. 예를 들어 하나의 요소가 :hover 상태가 될 수 없는데 다른 요소는 :hover가 될 수 있다면 이는 동일한 마우스 상태라고 볼 수 없다.
+2. 아이디가 없는 요소
+3. 태그 이름이 일치해야 함
+4. 클래스 속성이 일치해야 함
+5. link 상태가 일치해야 함
+6. focus 상태가 일치해야 함
+7. 문서 전체에서 속성 선택자의 영향을 받는 요소가 없어야 함. (e.g. input[type=text]{...})
+8. 요소에 인라인 스타일 속성이 없어야 함. (e.g. `<p style="...">...</p>`)
+9. 문서 전체에서 형제 선택자(+ 선택자와 :first-child, :last-child)를 사용하지 않아야 한다. 
+
+## 7-5. How the tree saves us work
+tree가 css parsing에 있어 작업량을 줄이는 방법은 다음과 같습니다.
+
+### 7-5-1. Division into struct
+style context, 즉 스타일 문맥은 struct(구조체)로 나뉘는데, 이는 선 또는 생상과 같은 종류의 스타일 정보를 포함합니다. 이러한 구조체의 속성들은 상속되거나 상속되지 않으며, 요소에 따라 명시되지 않는 한 하나의 부모로부터 상속됩니다. 상속되지 않은 속성들은 "reset(재설정) properties"라고 부르는데, 상속을 받지 않는 것으로 정해져 있다면 기본 값을 사용합니다.
+
+tree는 최종적으로 계산된 값을 포함하여 전체 구조체(struct)를 저장하는 방법으로 도움을 줍니다. 하위 node에 구조체를 위한 속성의 선언이 없다면, 저장된 상위 노드의 구조체 속성을 그대로 받아서 사용하는 것입니다.
