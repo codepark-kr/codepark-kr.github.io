@@ -49,7 +49,7 @@ img{ width: auto; height: auto; max-width: $container-width; margin-bottom: 14px
 
 
 h1, h2, h3, h4, h5, h6 {  margin: 0px;  font-weight: bold;  color: var(--text-color); color: rgb(190, 180, 158); }
-p, ul, ol { margin: 0px;  color: var(--text-color); }
+p, ul, ol { margin: 0px;  color: var(--text-color); margin-bottom: 10px; }
 a { text-decoration: underline;  color: var(--link-color); cursor: pointer;}
 a:hover { color: var(--background-color); background-color: var(--base-color); }
 
