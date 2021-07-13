@@ -245,7 +245,7 @@ This type of bottom up parser is called a shift-reduce parser, because the input
 ## 3-8. Generating parsers automatically
 There are tools that can generate a parser. You feed them the grammar of your language-its vocabulary and syntax rules-abd they generate a working parser. Creating a parser requires a deep understanding of parsing and it's not easy to create an optimized parser by hand, so parser generators can be very useful.
 
-WebKit users two well known parser generators: Flex for creating a lexer and Bison for creating a parser (you might run into them with the names Lex and Yacc). Flex input is a file containing regular expression definitions of the tokens. Bison's input us the language syntax rules in BNF format.
+WebKit uses two well known parser generators: Flex for creating a lexer and Bison for creating a parser (you might run into them with the names Lex and Yacc). Flex input is a file containing regular expression definitions of the tokens. Bison's input us the language syntax rules in BNF format.
 
 <br/>
 
@@ -344,11 +344,11 @@ Basic example-tokenizing the following HTML:
 {% endraw %}
 {% endhighlight %}
 
-The initial state is the "Date state". When the &lt; character is encountered, the state is changed to **"Tag open state"**. Consuming an `a-z` character causes creation of a **"Start tag token"**, the state is changed to "Tag name state". We stay in this state until the &gt; character is consumed. Each character is appended to the new token name. In our case the created token is an `html` token.
+The initial state is the "Data state". When the &lt; character is encountered, the state is changed to **"Tag open state"**. Consuming an `a-z` character causes creation of a **"Start tag token"**, the state is changed to "Tag name state". We stay in this state until the &gt; character is consumed. Each character is appended to the new token name. In our case the created token is an `html` token.
 
 When the &gt; tag is reached, the current token is emitted and the state changes back to the **"Data state"**. The `<body>` tag will be treated by the same steps. So far the `html` and `body` tags were emitted. We are now back at the **"Data state"**. Consuming the `H` character of `Hellow World` will cause creation and emitting of a character token, this goes on until the &lt; of `</body>` is reached. We will emit a character token for each character of `Hello World`.
 
-We are now back at the **"Tag open state"**. Consuming the next input / will cause creation of an `end tag token` and a move to the **"Tag name state"**. Again we stay in this state until we react &gt;. Then the new tag token will be emitted and we go back to the **"Data state"**. The `</html>` input will be treated luke the previous case.
+We are now back at the **"Tag open state"**. Consuming the next input `/` will cause creation of an `end tag token` and a move to the **"Tag name state"**. Again we stay in this state until we react &gt;. Then the new tag token will be emitted and we go back to the **"Data state"**. The `</html>` input will be treated luke the previous case.
 
 ![tokenizingthe](/uploads/tokenizingthe.png) *Figure: Tokenizing the example input*
 
