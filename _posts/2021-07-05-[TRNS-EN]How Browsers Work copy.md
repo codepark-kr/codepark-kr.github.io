@@ -771,8 +771,7 @@ The idea is to see the tree paths as words in a lexicon. Lets say we already com
 Suppose we need to match rules for another element in the content tree, and find out the matched rules (in the correct order) are B-E-I. We already have this path in the tree because we already computed path A_B_E_I_L. We will now have less work to do.
 
 Let's see how the tree saves us work.
-
- ### 7-5-1. Division into structs
+### 7-5-1. Division into structs
 The style contexts are divided into structs. Those structs contain style information for a certain category like border or color. All the properties in a struct are either inherited or non inherited. Inherited properties are properties that unless defined by the element, are inherited from its parent. Non inherited properties (called "reset" properties) use default values if not defined. 
 
 The tree helps us by caching entire structs (containing the computed end values) in the tree. The idea is that if the bottom node didn't supply a definition for a struct, a cached struct in an upper node can be used.

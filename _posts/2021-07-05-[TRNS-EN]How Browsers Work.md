@@ -330,3 +330,61 @@ tree가 css parsing에 있어 작업량을 줄이는 방법은 다음과 같습�
 style context, 즉 스타일 문맥은 struct(구조체)로 나뉘는데, 이는 선 또는 생상과 같은 종류의 스타일 정보를 포함합니다. 이러한 구조체의 속성들은 상속되거나 상속되지 않으며, 요소에 따라 명시되지 않는 한 하나의 부모로부터 상속됩니다. 상속되지 않은 속성들은 "reset(재설정) properties"라고 부르는데, 상속을 받지 않는 것으로 정해져 있다면 기본 값을 사용합니다.
 
 tree는 최종적으로 계산된 값을 포함하여 전체 구조체(struct)를 저장하는 방법으로 도움을 줍니다. 하위 node에 구조체를 위한 속성의 선언이 없다면, 저장된 상위 노드의 구조체 속성을 그대로 받아서 사용하는 것입니다.
+
+<br/>
+
+# 8. Layout
+renderer가 생성되고 트리에 추가될 때, position과 size를 가지고 있지 않는데, 이러한 값을 계산하는 것을 Layout(WebKit) 또는 reflow(Gecko)라고 명칭합니다. 
+
+HTML은 flow-based model(flow 기반의 모델)을 사용하는데, 이것은 단일 경로를 통해 크기와 위치를 계산할 수 있다는 것을 의미합니다. 일반적으로 "flow" 내에서 후순에 등장하는 요소는, 앞 서 등장한 요소의 위치와 크기에 영향을 미치지 않기 때문에, layout, 즉 배치 과정은 왼쪽에서 오른쪽 또는 위에서 아래로 진행됩니다. (코드의 처리 순서를 생각해 보세요.) 단, HTML table은 하나 이상의 경로를 요구한다는 예외가 존재합니다.
+
+layout은 되풀이되는(recursive) 프로세스입니다. 이는 root, 즉 최상단 renderer(예를 들면 HTML document에서의 html 태그)에서 시작되며, layout은 일부 또는 모든 프레임 계층을 통해 반복되며, 각 renderer가 요구하는 위치와 크기 정보를 계산합니다.
+
+최상위 renderer의 좌표값은 0,0이며 시각적으로 보여지는 부분인 브라우저 윈도우의 부분, 즉 viewport의 면적을 차지합니다.
+
+## 8-1. Dirty bit system
+모든 작은 변경마다 전체의 layout을 수정하지 않기 위해 브라우저는 "dirty bit" 시스템을 사용합니다. renderer는 해당 요소와 그의 자식 요소들을 "dirty" 표식으로 추가하거나 변경합니다. 여기서의 dirty란, layout, 즉 배치가 필요하다는 의미입니다. 
+
+## 8-2. Global and incremental layout
+배치는 renderer tree 전체에서 일어날 수 있는데, 이 것을 "Global layout", 즉 전역 배치라 칭합니다.
+이러한 전역 배치는 다음과 같은 경우에 발생합니다:
+
+1. 글꼴 크기 변경과 같이 모든 renderer에 영향을 주는 전역(global) 스타일 변경
+2. 화면 크기 변경에 의한 결과
+
+또한 layout은 점증적(incremental)일 수 있고, 오직 dirty, 즉 layout이 필요한 상태로 규정된(= dirty) renderer들만이 점증적으로 전개됩니다. (추가적인 layout이 필요한 경우 이는 약간의 손실을 야기합니다.) 점증적 배치는 renderer가 dirty로 규정된 경우 비동기적으로 발동됩니다. 예를 들어, 네트워크로부터 추가 내용을 받은 뒤, 이를 DOM tree에 더한 후, 새로운 renderer가 render tree에 추가될 때를 말합니다.
+
+## 8-3. Asynchronous and Synchronous layout
+점증 배치는 비동기적으로 실행됩니다. 파이어폭스(Gecko)는 점증적인 배치를 위해 reflow(= layout = 배치) commands를 쌓아놓고, 점증적 배치와 스케줄러는 이 커맨드들의 일괄적인 실행을 발화합니다. WebKit도 점증적인 layout을 실행하는 일종의 타이머가 존재하는데, 해당 tree를 가로질러 "dirty renderers"를 배치합니다. 반면에, 전역 배치는 일반적으로 동기적으로 실행됩니다.
+
+## 8-4. Optimizations
+layout이 "resize"나 renderer의 position의 변화 때문에 실행되는 경우, render의 사이즈는 재계산하지 않고 캐시로부터 가져옵니다. 
+
+## 8-5. The layout process
+배치, 즉 layout은 통상적으로 다음과 같은 형태로 진행됩니다:
+
+1. 부모 renderer가 자신의 너비를 결정
+2. 필요하다면 자식 요소의 layout을 호출하여 자식 요소의 높이를 계산(부모와 자식 요소가 dirty 상태에 있거나, 등등의 이유로)
+3. 부모 요소는 자식 요소의 누적된 높이, margin, padding등을 통해 자신의 높이를 설정한다. 이 값은 부모 renderer가 사용하게 된다.
+4. dirty bit flag의 제거
+
+Gecko(파이어폭스)는 "state" object인 (nsHTMLReflowState)를 layout(reflow)를 위한 parameter와 같이 사용하는데, 이 state는 부모의 너비를 포함합니다. 이 layout의 결과는 "matrix object"인 (nsHTMLReflowMatrics)인데, 이는 높이가 계산된 renderer를 포함합니다.
+
+<br/>
+
+# 9. Painting
+painting, 즉 그리기 단계에서는 화면에 content를 표출하기 위해 render tree를 탐색한 후, renderer의 "paint" method를 호출합니다. 여기서의 "그리기"란 ui기반의 component를 사용합니다.
+
+ ## 9-1. Global and Incremental
+그리기 역시 배치(layout)과 마찬가지로 전역 또는 점증적인 방식으로 수행됩니다. 점증적인 그리기에서 일부 renderer는, 전체 tree에 영향을 주지 않는 방식으로 변경됩니다. 변경된 renderer는 화면 위의 사각형을 무효화하는데, OS는 이 것을 "dirty region = 그리기가 필요한 영역"으로 보고 "paint" 이벤트를 발생시켜 그리기 작업을 수행합니다.
+
+## 9-2. The painting order
+실제로 요소가 stacking contexts에 쌓이는 순서는 다음과 같으며, 이 것이 곧 그리기 순서에 영향을 미칩니다.
+1. 배경 색
+2. 배경 이미지
+3. 테두리
+4. 자식 요소
+5. 아웃라인
+
+## 9-3. Dynamic Changes
+브라우저는 변경 사항에 대해 가급적 최소한의 동작만으로 반응하고자 합니다. 따라서, 요소의 색상에 대한 변경에는 오직 해당 요소에 대한 repaint만을 발생시킵니다. 요소의 위치가 바뀌게 되면, 대상 요소와 자식, 그리고 형제 요소의 repaint와 재배치가 발생합니다. DOM node를 추가하는 것은 노드의 재배치 및 repaint가 발생됩니다. "html" 요소의 폰트 사이즈가 증가하는 것과 같은 주요한 변경은, 캐시를 무효화하고 트리 전체의 배치 및 repaint가 발생합니다.
