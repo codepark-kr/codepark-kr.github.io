@@ -12,6 +12,7 @@ header_pages:
   - database.md
   - debug.md
   - seminar-lecture.md
+  - devvoca.md
   # - contact.md
 
 style: dark
