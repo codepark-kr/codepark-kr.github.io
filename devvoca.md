@@ -100,5 +100,3 @@ ___
 *** overhead:** 
 *** negotiation:**
 
-## Reference & Research
-### 1. WebSocket
