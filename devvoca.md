@@ -95,4 +95,10 @@ permalink: /devvoca
 *** axis:** 축, 중심축
 
 ___
-  
+
+## 2. 그림으로 배우는 HTTP & Network Basic
+*** overhead:** 
+*** negotiation:**
+
+## Reference & Research
+### 1. WebSocket
