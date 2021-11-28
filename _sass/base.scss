@@ -155,7 +155,6 @@ mark{ background-color: white; color: black; font-weight: bold;}
 }
 
 
-
 /**
  * Highlight/Markup
  */
@@ -214,17 +213,19 @@ textarea { vertical-align: top; }
  * Code and syntax highlighting
  */
 .lineno { color: var(--code-color-1); margin-right: 15px; }
-figure.highlight{ margin: 5px 0; border: 1px solid rgb(59, 58, 58);  margin-bottom: 20px; width: calc(100% - 40px); max-width: 940px; margin-left: 14px; padding: 10px; }
-pre,code.highlighter-rouge  { border: none;  padding: 0;  margin: 0;  overflow: auto;  font-size: 12pt !important; padding: 10px; margin: 8px;
-                              background-color: rgb(39, 39, 39); line-height: 1.7 !important;  font-family: 'Source Code Pro', monospace !important; }
-code.highlighter-rouge{ font-size: 12pt; color: rgb(204, 27, 27); padding: 2px;}
-code{ font-size: 12pt; font-family: 'Source Code Pro', monospace !important; letter-spacing: -1px; max-width: $container-max-width;}
+figure.highlight{ margin: 5px 0; border: 1px solid rgb(59, 58, 58);  margin-bottom: 20px; width: calc(100% - 40px); max-width: 940px; margin-left: 0px; padding: 10px; background-color: none; }
+pre,code.highlighter-rouge  { border: none;  padding: 0;  margin: 0;  overflow: auto;  font-size: 11pt !important; padding: 10px; margin: 8px;
+                            //   background-color: rgb(39, 39, 39); 
+                              line-height: 1.7 !important;  font-family: 'Source Code Pro', monospace !important; }
+code.highlighter-rouge{ font-size: 11pt; color: rgb(204, 27, 27); padding: 2px; }
+pre { margin-left: -10px; margin-top: -10px; margin-bottom: -10px; }
+code{ font-size: 11pt; font-family: 'Source Code Pro', monospace !important; letter-spacing: 0px; max-width: $container-max-width;}
 
       .highlight table td { padding: 5px; }
       .highlight table pre { margin: 0;}
       .highlight, .highlight .w {
         color: #fbf1c7;
-        background-color: #282828;
+        // background-color: #282828;
       }
       .highlight .err {
         color: #fb4934;

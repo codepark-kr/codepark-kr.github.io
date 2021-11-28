@@ -6,7 +6,7 @@ url: "https://b2a3e8.github.io"
 header_pages:
   - index.md
   - about.md
-  - transcription.md
+  - shorts.md
   - spring-theory.md
   - spring-boot&JPA.md
   - database.md
