@@ -1,6 +1,7 @@
 ---
 layout: page
 title: /spring-theory
+categories: [test]
 permalink: /spring-theory
 ---
 ### Spring Boot Theory (frequent update)

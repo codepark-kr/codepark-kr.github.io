@@ -1,4 +1,4 @@
-<!-- {%- assign page_paths = site.header_pages | default: default_paths -%}
+{%- assign page_paths = site.header_pages | default: default_paths -%}
 <header>
   <div class="menu">
     <ul>
@@ -9,5 +9,27 @@
         {%- endif -%}
       {%- endfor -%}&nbsp;&nbsp;
     </ul>
+    <!-- <ul>
+      {% assign pages_list = site.pages %}
+        {% for node in pages_list %}
+          {% if node.title != null %}
+            {% if node.layout == "category" %}
+              <li><a class="category-link {% if page.url == node.url %} active{% endif %}"
+              href="{{ my_page.url | relative_url }}">{{ node.title }}</a></li>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+    </ul> -->
   </div>
-</header> -->
+</header>
+<!-- {% assign pages_list = site.pages %}
+{% for node in pages_list %}
+  {% if node.title != null %}
+    {% if node.layout == "category" %}
+      <li><a class="category-link {% if page.url == node.url %} active{% endif %}"
+      href="{{ site.baseurl }}{{ node.url }}">{{ node.title }}</a></li>
+    {% endif %}
+  {% endif %}
+{% endfor %} -->
+
+

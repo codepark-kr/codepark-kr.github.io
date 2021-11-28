@@ -1,6 +1,7 @@
 ---
 layout: page
 title: /network
+category: [test]
 permalink: /network
 ---
 ### Network Theory (frequent update)

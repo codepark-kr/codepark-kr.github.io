@@ -1,6 +1,7 @@
 ---
 layout: page
 title: /database
+categories: [test]
 permalink: /database
 ---
 

@@ -1,6 +1,7 @@
 ---
 layout: page
 title: /seminar&lecture(WIP)
+categories: [test]
 permalink: /seminar-lecture
 ---
 ### Seminar & Lecture (frequent update)

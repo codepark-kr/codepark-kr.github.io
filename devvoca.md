@@ -1,6 +1,7 @@
 ---
 layout: page
 title: /devvoca
+categories: [test]
 permalink: /devvoca
 ---
 ### DevVoca (frequent update)

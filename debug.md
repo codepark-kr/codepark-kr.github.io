@@ -1,6 +1,7 @@
 ---
 layout: page
 title: /debug&refactor
+categories: [test]
 permalink: /debug-refactor
 ---
 
